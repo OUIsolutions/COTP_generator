@@ -46,9 +46,9 @@ void ctop_create_ctop_seed(
     char interval_mark[3] = {0};
     private_ctop_format_num(interval_mark,(int)strlen(interval_string),2);
 
-    char password_formated[4] = {0};
+    char password_size_formated[4] = {0};
     private_ctop_format_num(
-            password_formated,
+            password_size_formated,
             private_ctop_sanitize_range(password_size, 5, 256),
             3
             );
@@ -56,16 +56,21 @@ void ctop_create_ctop_seed(
 
 
     sprintf(result, "%s%s%s%s%s%d",
-            key_mark, key,
+            key_mark,
+            key,
             interval_mark,
             interval_string,
-            password_formated,
+            password_size_formated,
             (bool)allow_letters_on_password
       );
 #ifdef CTOP_DEBUG
     printf("generating seed ----------------------------------------------------\n");
     printf("\tkey mark:%s\n",key_mark);
     printf("\tkey:%s\n",key);
+    printf("\tinterval mark:%s\n",interval_mark);
+    printf("\tinterval:%s\n",interval_string);
+    printf("\tpassword size:%s\n", password_size_formated);
+    printf("\tallow letters:%d\n",(bool)allow_letters_on_password);
     printf("\tseed:%s\n",result);
 #endif
 }

@@ -9,7 +9,7 @@ int main(){
     ctop_create_ctop_seed(
             seed,
             "432",
-            CTOP_MAX,
+            5,
             ctop_minutes(1),
             CTOP_MAX,
             true,
