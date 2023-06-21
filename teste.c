@@ -5,10 +5,11 @@
 int main(){
 
     char *key = ctop_create_key(
-            "dssdds",
-            15,
+            "dssdds3sdsfs",
+            19,
             ctop_minutes(1),
             4,
+            false,
             true
     );
 
