@@ -1,5 +1,5 @@
 
 
-long minutes(long minutes);
-long hours(long hours);
-long days(long days);
+long ctop_minutes(long minutes);
+long ctop_hours(long hours);
+long ctops_days(long days);
