@@ -5,7 +5,8 @@
 #define CTOP_ALLOW_LETTERS true
 #define CTOP_ONLY_NUMBERS false
 
-void ctop_create_pseudo_random_seed(char *result,const char *secret,unsigned  long current_time);
+void ctop_create_seed_from_long(char *result, const char *secret, unsigned  long current_time);
+void ctop_create_seed_from_string(char *result, const char *secret, const char *second_secret);
 
 void ctop_create_pseud_random_key(
         char *result,

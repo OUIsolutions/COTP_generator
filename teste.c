@@ -6,10 +6,9 @@
 int main(){
 
     const char *secret = "ijsiofushaiuhsiuahuissahuhasusaupspausuasaipus";
-
-
+    unsigned  long now = time(NULL);
     char seed[200] ={0};
-    ctop_create_pseudo_random_seed(seed,secret, 1);
+    ctop_create_seed_from_long(seed, secret, now);
     char key[CTOP_MAX] = {0};
     ctop_create_pseud_random_key(
             key,
