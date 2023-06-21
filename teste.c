@@ -4,6 +4,7 @@
 #include "COTP/COTP_main.h"
 int main(){
 
-    char *test = private_ctop_format_num(555,4);
-    printf("%s",test);
+    char *test =private_cto_sub_str("mateus",0,2);
+    printf("%s\n",test);
+
 }

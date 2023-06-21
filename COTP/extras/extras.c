@@ -27,3 +27,14 @@ char * private_ctop_format_num(int num,int num_size){
     return result;
 
 }
+
+char * private_cto_sub_str(const char *element,int start_point,int end_point){
+    char *result = malloc(end_point - start_point +2);
+    int result_size = 0;
+    for(int i = start_point; i < end_point; i++){
+        result[result_size] = element[i];
+        result_size+=1;
+    }
+    result[result_size] ='\0';
+    return result;
+}
