@@ -10,16 +10,16 @@ void ctop_create_ctop_seed(
         bool allow_letters_on_password
 ){
 
-    char keey[257] = {0};
+    char key[257] = {0};
     int generated_key_size;
 
     if(allow_letters_on_key){
         char sha_seed[257] = {0};
         private_ctop_calc_sha_256_returning_string(sha_seed, raw_seed, strlen(raw_seed));
 
-        generated_key_size = private_ctop_sanitize_range(key_size, 5 , 256);
+            generated_key_size = private_ctop_sanitize_range(key_size, 5 , 256);
         private_ctop_sub_str(
-                keey,
+                key,
                 sha_seed,
                 0,
                 generated_key_size
@@ -33,11 +33,13 @@ void ctop_create_ctop_seed(
         generated_key_size = private_ctop_sanitize_range(key_size, 5, 19);
         char temporary_key[20] ={0};
         sprintf(temporary_key,"%lu",seed_in_int);
-        private_ctop_sub_str(keey,temporary_key,0,generated_key_size);
+        private_ctop_sub_str(key, temporary_key, 0, generated_key_size);
 
     }
-    char seed_mark[4] = {0};
-    private_ctop_format_num(seed_mark,generated_key_size,3);
+
+    char key_mark[4] = {0};
+    private_ctop_format_num(key_mark, generated_key_size, 3);
+
 
     char interval_string[12]= {0};
     sprintf(interval_string,"%d",interval);
@@ -52,17 +54,40 @@ void ctop_create_ctop_seed(
             );
 
 
-    #ifdef CTOP_DEBUG
-        sprintf(result,"%s|%s|%s|%s|%s|%d",
-                seed_mark,keey,interval_mark,interval_string,password_formated,(bool)allow_letters_on_password);
-    #else
-        sprintf(result,"%s%s%s%s%s%d",
-                seed_mark,keey,interval_mark,interval_string,password_formated,(bool)allow_letters_on_password);
-    #endif
 
-
+    sprintf(result, "%s%s%s%s%s%d",
+            key_mark, key,
+            interval_mark,
+            interval_string,
+            password_formated,
+            (bool)allow_letters_on_password
+      );
+#ifdef CTOP_DEBUG
+    printf("generating seed ----------------------------------------------------\n");
+    printf("\tkey mark:%s\n",key_mark);
+    printf("\tkey:%s\n",key);
+    printf("\tseed:%s\n",result);
+#endif
 }
 
 void ctop_get_passowrd(char *result,const char *seed){
-    
+
+    int acumulator = 0;
+    char key_mark[4] = {0};
+    private_ctop_sub_str(key_mark, seed, acumulator, 3);
+    acumulator+=3;
+    int key_size;
+    sscanf(key_mark, "%d", &key_size);
+    char key[257] = {0};
+    private_ctop_sub_str(key,seed,acumulator,(acumulator+key_size));
+
+    #ifdef CTOP_DEBUG
+        printf("generating password ----------------------------------------------------\n");
+        printf("\tkey mark:%s\n",key_mark);
+        printf("\tkey:%s\n",key);
+
+    #endif
+
+    acumulator+=key_size;
+
 }
