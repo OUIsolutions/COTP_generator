@@ -28,7 +28,7 @@ char * private_ctop_format_num(int num,int num_size){
 
 }
 
-char * private_cto_sub_str(const char *element,int start_point,int end_point){
+char * private_ctop_sub_str(const char *element,int start_point,int end_point){
     char *result = malloc(end_point - start_point +2);
     int result_size = 0;
     for(int i = start_point; i < end_point; i++){
@@ -37,4 +37,12 @@ char * private_cto_sub_str(const char *element,int start_point,int end_point){
     }
     result[result_size] ='\0';
     return result;
+}
+
+int private_ctop_int_sub_str(const char *element,int start_point,int end_point){
+    char *result = private_ctop_sub_str(element,start_point,end_point);
+    int result_formated;
+    sscanf(result,"%d",&result_formated);
+    free(result);
+    return result_formated;
 }
