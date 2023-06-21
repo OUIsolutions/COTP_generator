@@ -1,7 +1,8 @@
 
 
 
-char * ctop_create_key(
+void ctop_create_key(
+        char *result,
         const char *seed,
         int key_size,
         int interval,
