@@ -26,15 +26,20 @@ void  private_ctop_format_num(char *result,int num,int num_size){
 
 void  private_ctop_calc_sha_256_returning_string(char *hash_string, const void *input, size_t len){
     uint8_t hash[SIZE_OF_SHA_256_HASH];
+
     calc_sha_256(hash, input, len);
     for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
         sprintf(hash_string + i * 2, "%02x", hash[i]);
     }
 }
+bool *track = false;
 void private_ctop_sub_str(char *result,const char *element,int start_point,int end_point){
 
     int result_size = 0;
     for(int i = start_point; i < end_point; i++){
+        if(track){
+            printf("%d\n",i);
+        }
         result[result_size] = element[i];
         result_size+=1;
     }

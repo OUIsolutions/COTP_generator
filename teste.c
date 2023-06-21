@@ -5,11 +5,10 @@
 #include "COTP/COTP_main.h"
 int main(){
      char seed[400] = {0};
-
     ctop_create_ctop_seed(
             seed,
-            "432",
-            400,
+            "a",
+            100,
             ctop_minutes(1),
             CTOP_MAX,
             true,
@@ -17,5 +16,5 @@ int main(){
     );
 
      char password[CTOP_MAX];
-    ctop_get_passowrd(password,seed);
+    //ctop_get_passowrd(password,seed);
 }
