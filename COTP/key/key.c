@@ -3,7 +3,7 @@
 void ctop_create_pseud_random_key(
         char *result,
         const char *secret,
-        const char *seed,
+        unsigned long seed,
         int key_size,
         int interval,
         int password_size,
