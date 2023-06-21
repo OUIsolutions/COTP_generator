@@ -81,10 +81,9 @@ void ctop_get_passowrd(char *result,const char *seed){
     char key_mark[4] = {0};
     private_ctop_sub_str(key_mark, seed, acumulator, 3);
     acumulator+=3;
-    int key_size;
-    sscanf(key_mark, "%d", &key_size);
+    int key_size = atoi(key_mark);
     char key[257] = {0};
-    private_ctop_sub_str(key,seed,acumulator,(acumulator+key_size));
+    private_ctop_sub_str(key,seed,acumulator,key_size+acumulator);
 
     #ifdef CTOP_DEBUG
         printf("generating password ----------------------------------------------------\n");
