@@ -9,8 +9,7 @@ int private_ctop_sanitize_range(int value, int min, int max){
     }
     return value;
 }
-
-char * private_ctop_format_num(int num,int num_size){
+void  private_ctop_format_num(char *result,int num,int num_size){
 
     char element[10] = {0};
     sprintf(element,"%d",num);
@@ -21,29 +20,32 @@ char * private_ctop_format_num(int num,int num_size){
         zeros[i]  = '0';
     }
     int result_size = zeros_to_add + element_size;
-    char *result = malloc(result_size+2);
     sprintf(result,"%s%s",zeros,element);
     result[result_size] = '\0';
-    return result;
-
 }
 
-char * private_ctop_sub_str(const char *element,int start_point,int end_point){
-    char *result = malloc(end_point - start_point +2);
+void  private_ctop_calc_sha_256_returning_string(char *hash_string, const void *input, size_t len){
+    uint8_t hash[SIZE_OF_SHA_256_HASH];
+    calc_sha_256(hash, input, len);
+    for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
+        sprintf(hash_string + i * 2, "%02x", hash[i]);
+    }
+}
+void private_ctop_sub_str(char *result,const char *element,int start_point,int end_point){
+
     int result_size = 0;
     for(int i = start_point; i < end_point; i++){
         result[result_size] = element[i];
         result_size+=1;
     }
     result[result_size] ='\0';
-    return result;
 }
 
 int private_ctop_int_sub_str(const char *element,int start_point,int end_point){
-    char *result = private_ctop_sub_str(element,start_point,end_point);
+    char result[10]= {0};
+    private_ctop_sub_str(result,element,start_point,end_point);
     int result_formated;
     sscanf(result,"%d",&result_formated);
-    free(result);
     return result_formated;
 }
 
@@ -57,3 +59,5 @@ unsigned  long long private_ctop_transform_string_in_number(const char* str) {
 
     return hash;
 }
+
+
