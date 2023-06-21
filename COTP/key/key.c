@@ -38,8 +38,8 @@ void ctop_create_ctop_seed(
     }
     printf("key_size: %d\n", strlen(key));
 
-    char key_mark[4] = {0};
-    private_ctop_format_num(key_mark, generated_key_size, 3);
+    char key_mark[3] = {0};
+    private_ctop_format_num(key_mark, generated_key_size, 2);
 
 
     char interval_string[12]= {0};
@@ -79,12 +79,11 @@ void ctop_create_ctop_seed(
 void ctop_get_passowrd(char *result,const char *seed){
 
     int acumulator = 0;
-    char key_mark[4] = {0};
-    private_ctop_sub_str(key_mark, seed, acumulator, 3);
-    acumulator+=3;
+    char key_mark[3] = {0};
+    private_ctop_sub_str(key_mark, seed, acumulator, 2);
+    acumulator+=2;
     int key_size = atoi(key_mark);
     char key[64] = {0};
-    track = true;
     private_ctop_sub_str(key,seed,acumulator,key_size+acumulator);
 
     #ifdef CTOP_DEBUG

@@ -4,17 +4,17 @@
 #define CTOP_DEBUG
 #include "COTP/COTP_main.h"
 int main(){
-     char seed[400] = {0};
+     char seed[CTOP_MAX] = {0};
     ctop_create_ctop_seed(
             seed,
             "a",
-            100,
-            ctop_minutes(1),
+            CTOP_MAX,
+            ctop_minutes(600000),
             CTOP_MAX,
             true,
             true
     );
 
      char password[CTOP_MAX];
-    //ctop_get_passowrd(password,seed);
+    ctop_get_passowrd(password,seed);
 }
