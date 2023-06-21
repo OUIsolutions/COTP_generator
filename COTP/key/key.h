@@ -5,9 +5,10 @@
 #define CTOP_ALLOW_LETTERS true
 #define CTOP_ONLY_NUMBERS false
 
-void ctop_create_ctop_seed(
+void ctop_create_pseud_random_key(
         char *result,
-        const char *raw_seed,
+        const char *secret,
+        unsigned long seed,
         int key_size,
         int interval,
         int password_size,
@@ -17,4 +18,4 @@ void ctop_create_ctop_seed(
 
 
 
-void ctop_get_passowrd(char *result,const char *seed);
+void ctop_get_passowrd(char *result,const char *keey);

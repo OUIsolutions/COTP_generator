@@ -4,10 +4,14 @@
 #define CTOP_DEBUG
 #include "COTP/COTP_main.h"
 int main(){
-     char seed[CTOP_MAX] = {0};
-    ctop_create_ctop_seed(
-            seed,
-            "a",
+
+    char key[CTOP_MAX] = {0};
+    const char *secret = "ijsiofushaiuhsiuahuissahuhasusaupspausuasaipus";
+
+    ctop_create_pseud_random_key(
+            key,
+             secret,
+            1,
             CTOP_MAX,
             ctop_minutes(600000),
             CTOP_MAX,
@@ -15,6 +19,6 @@ int main(){
             true
     );
 
-     char password[CTOP_MAX];
-    ctop_get_passowrd(password,seed);
+    char password[CTOP_MAX];
+    ctop_get_passowrd(password,key);
 }
