@@ -62,3 +62,7 @@ void ctop_create_ctop_seed(
 
 
 }
+
+void ctop_get_passowrd(char *result,const char *seed){
+    
+}
