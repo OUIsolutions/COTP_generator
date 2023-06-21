@@ -1,5 +1,5 @@
 
-
+/*
 
 char * ctop_create_key(
         const char *seed,
@@ -14,7 +14,8 @@ char * ctop_create_key(
     int generated_key_size;
 
     if(allow_letters_on_key){
-        char *sha_seed = calc_sha_256_from_string_returning_string(seed);
+        uint8_t hash[32];
+        calc_sha_256(hash, "abc", strlen("abc"));
         generated_key_size = private_ctop_sanitize_range(key_size, 5 , 256);
         key = private_ctop_sub_str(
                 sha_seed,
@@ -55,3 +56,4 @@ char * ctop_create_key(
 
 }
 
+*/

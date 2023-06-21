@@ -4,7 +4,7 @@
 #define CTOP_DEBUG
 #include "COTP/COTP_main.h"
 int main(){
-
+    /*
     char *key = ctop_create_key(
             "dssdds3sdsfs",
             5,
@@ -15,5 +15,8 @@ int main(){
     );
 
     printf("%s\n",key);
-
+    */
+    uint8_t hash[32];
+    calc_sha_256(hash, "abc", strlen("abc"));
+    printf("%s\n",hash);
 }
