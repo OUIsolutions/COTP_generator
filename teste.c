@@ -3,18 +3,18 @@
 //
 #include "COTP/COTP_main.h"
 int main(){
-     char result[400] = {0};
+     char seed[400] = {0};
 
-     ctop_create_key(
-             result,
+    ctop_create_ctop_seed(
+            seed,
             "432",
-            400,
-            ctops_days(500000),
-             400,
-            false,
-            false
+            CTOP_MAX,
+            ctop_minutes(1),
+            CTOP_MAX,
+            true,
+            true
     );
 
-     printf("%s\n",result);
+     printf("%s\n",seed);
 
 }

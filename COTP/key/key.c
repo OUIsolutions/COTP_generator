@@ -1,8 +1,8 @@
 
 
-void ctop_create_key(
+void ctop_create_ctop_seed(
         char *result,
-        const char *seed,
+        const char *raw_seed,
         int key_size,
         int interval,
         int password_size,
@@ -15,7 +15,7 @@ void ctop_create_key(
 
     if(allow_letters_on_key){
         char sha_seed[257] = {0};
-        private_ctop_calc_sha_256_returning_string(sha_seed,seed, strlen(seed));
+        private_ctop_calc_sha_256_returning_string(sha_seed, raw_seed, strlen(raw_seed));
 
         generated_key_size = private_ctop_sanitize_range(key_size, 5 , 256);
         private_ctop_sub_str(
@@ -28,9 +28,9 @@ void ctop_create_key(
     }
     else{
         char sha_seed[257] = {0};
-        private_ctop_calc_sha_256_returning_string(sha_seed,seed, strlen(seed));
+        private_ctop_calc_sha_256_returning_string(sha_seed, raw_seed, strlen(raw_seed));
         unsigned long seed_in_int = private_ctop_transform_string_in_number(sha_seed);
-        generated_key_size = private_ctop_sanitize_range(key_size,5,19);
+        generated_key_size = private_ctop_sanitize_range(key_size, 5, 19);
         char temporary_key[20] ={0};
         sprintf(temporary_key,"%lu",seed_in_int);
         private_ctop_sub_str(keey,temporary_key,0,generated_key_size);
@@ -47,7 +47,7 @@ void ctop_create_key(
     char password_formated[4] = {0};
     private_ctop_format_num(
             password_formated,
-            private_ctop_sanitize_range(password_size,5,256),
+            private_ctop_sanitize_range(password_size, 5, 256),
             3
             );
 
