@@ -27,23 +27,31 @@ char * ctop_create_key(
         char *sha_seed = calc_sha_256_from_string_returning_string(seed);
         unsigned long seed_in_int = private_ctop_transform_string_in_number(sha_seed);
         generated_key_size = private_ctop_sanitize_range(key_size,5,19);
-        char temporary_key[30] ={0};
+        char temporary_key[20] ={0};
         sprintf(temporary_key,"%lu",seed_in_int);
         key = private_ctop_sub_str(temporary_key,0,generated_key_size);
         free(sha_seed);
     }
 
-
     char *seed_mark = private_ctop_format_num(generated_key_size,3);
-    int result_size = generated_key_size + 3;
-    char *result = (char*)malloc(result_size+2);
+
+    char interval_string[12]= {0};
+    sprintf(interval_string,"%d",interval);
+    char *interval_mark  = private_ctop_format_num((int)strlen(interval_string),2);
 
 
-    sprintf(result,"%s%s",seed_mark,key);
+    char result[400];
+
+    #ifdef CTOP_DEBUG
+        sprintf(result,"%s|%s|%s|%s",seed_mark,key,interval_mark,interval_string);
+    #else
+        sprintf(result,"%s%s%s%s",seed_mark,key,interval_mark,interval_string);
+    #endif
+
     free(key);
     free(seed_mark);
-
-    return result;
+    free(interval_mark);
+    return strdup(result);
 
 }
 
