@@ -1,7 +1,7 @@
 
 
 
-#define CTOP_MAX 400
+#define CTOP_MAX 100
 #define CTOP_ALLOW_LETTERS true
 #define CTOP_ONLY_NUMBERS false
 

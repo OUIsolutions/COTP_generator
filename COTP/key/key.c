@@ -10,14 +10,14 @@ void ctop_create_ctop_seed(
         bool allow_letters_on_password
 ){
 
-    char key[257] = {0};
+    char key[65] = {0};
     int generated_key_size;
 
     if(allow_letters_on_key){
-        char sha_seed[257] = {0};
+        char sha_seed[65] = {0};
         private_ctop_calc_sha_256_returning_string(sha_seed, raw_seed, strlen(raw_seed));
 
-            generated_key_size = private_ctop_sanitize_range(key_size, 5 , 256);
+            generated_key_size = private_ctop_sanitize_range(key_size, 5 , 64);
         private_ctop_sub_str(
                 key,
                 sha_seed,
@@ -27,7 +27,7 @@ void ctop_create_ctop_seed(
 
     }
     else{
-        char sha_seed[257] = {0};
+        char sha_seed[65] = {0};
         private_ctop_calc_sha_256_returning_string(sha_seed, raw_seed, strlen(raw_seed));
         unsigned long seed_in_int = private_ctop_transform_string_in_number(sha_seed);
         generated_key_size = private_ctop_sanitize_range(key_size, 5, 19);
@@ -50,7 +50,7 @@ void ctop_create_ctop_seed(
     char password_size_formated[4] = {0};
     private_ctop_format_num(
             password_size_formated,
-            private_ctop_sanitize_range(password_size, 5, 256),
+            private_ctop_sanitize_range(password_size, 5, 64),
             3
             );
 
@@ -83,7 +83,7 @@ void ctop_get_passowrd(char *result,const char *seed){
     private_ctop_sub_str(key_mark, seed, acumulator, 3);
     acumulator+=3;
     int key_size = atoi(key_mark);
-    char key[257] = {0};
+    char key[64] = {0};
     track = true;
     private_ctop_sub_str(key,seed,acumulator,key_size+acumulator);
 
