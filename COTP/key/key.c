@@ -1,20 +1,16 @@
 
 
 char * ctop_create_key(
-        const char *password,
-        long interval,
+        const char *seed,
         int key_size,
-        bool allow_letters,
-        bool encrypt_password
+        int interval,
+        int password_size,
+        bool allow_letters
 ){
+    char *sha_seed = calc_sha_256_from_file_returning_string(seed);
+    
 
-    char *key = (char*) malloc(300);
-
-    char *created_seed = (char*)password;
-
-    if(encrypt_password){
-        created_seed = calc_sha_256_from_string_returning_string(password);
-    }
 
 
 }
+

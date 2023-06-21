@@ -2,11 +2,11 @@
 
 
 char * ctop_create_key(
-        const char *password,
-        long interval,
+        const char *seed,
         int key_size,
-        bool allow_letters,
-        bool encrypt_password
+        int interval,
+        int password_size,
+        bool allow_letters
 );
 
 
