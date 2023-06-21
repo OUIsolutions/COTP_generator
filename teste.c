@@ -1,22 +1,20 @@
 //
 // Created by jurandi on 21-06-2023.
 //
-#define CTOP_DEBUG
 #include "COTP/COTP_main.h"
 int main(){
-    /*
-    char *key = ctop_create_key(
-            "dssdds3sdsfs",
-            5,
+     char result[400] = {0};
+
+     ctop_create_key(
+             result,
+            "432",
+            400,
             ctops_days(500000),
-            4,
-            true,
-            true
+             400,
+            false,
+            false
     );
 
-    printf("%s\n",key);
-    */
-    uint8_t hash[32];
-    calc_sha_256(hash, "abc", strlen("abc"));
-    printf("%s\n",hash);
+     printf("%s\n",result);
+
 }

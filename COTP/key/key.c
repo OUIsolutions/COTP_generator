@@ -44,11 +44,20 @@ void ctop_create_key(
     char interval_mark[3] = {0};
     private_ctop_format_num(interval_mark,(int)strlen(interval_string),2);
 
+    char password_formated[4] = {0};
+    private_ctop_format_num(
+            password_formated,
+            private_ctop_sanitize_range(password_size,5,256),
+            3
+            );
+
 
     #ifdef CTOP_DEBUG
-        sprintf(result,"%s|%s|%s|%s",seed_mark,keey,interval_mark,interval_string);
+        sprintf(result,"%s|%s|%s|%s|%s|%d",
+                seed_mark,keey,interval_mark,interval_string,password_formated,(bool)allow_letters_on_password);
     #else
-        sprintf(result,"%s%s%s%s",seed_mark,key,interval_mark,interval_string);
+        sprintf(result,"%s%s%s%s%s%d",
+                seed_mark,keey,interval_mark,interval_string,password_formated,(bool)allow_letters_on_password);
     #endif
 
 
