@@ -1,9 +1,12 @@
 
 
+void ctop_create_pseudo_random_seed(char *result,const char *secret,unsigned  long current_time){
+    sprintf(result,"%s%ld",secret, current_time);
+}
+
 void ctop_create_pseud_random_key(
         char *result,
-        const char *secret,
-        unsigned long seed,
+        const char *seed,
         int key_size,
         int interval,
         int password_size,
@@ -13,11 +16,9 @@ void ctop_create_pseud_random_key(
 
     char key[65] = {0};
     int generated_key_size;
-    char formated_secret[300] = {0};
-    sprintf(formated_secret,"%s%d", secret, seed);
     if(allow_letters_on_key){
         char sha_seed[65] = {0};
-        private_ctop_calc_sha_256_returning_string(sha_seed, formated_secret, strlen(secret));
+        private_ctop_calc_sha_256_returning_string(sha_seed, seed, strlen(seed));
 
         generated_key_size = private_ctop_sanitize_range(key_size, 5 , 64);
         private_ctop_sub_str(
@@ -30,7 +31,7 @@ void ctop_create_pseud_random_key(
     }
     else{
         char sha_seed[65] = {0};
-        private_ctop_calc_sha_256_returning_string(sha_seed, formated_secret, strlen(secret));
+        private_ctop_calc_sha_256_returning_string(sha_seed, seed, strlen(seed));
         unsigned long seed_in_int = private_ctop_transform_string_in_number(sha_seed);
         generated_key_size = private_ctop_sanitize_range(key_size, 5, 19);
         char temporary_key[20] ={0};

@@ -5,13 +5,15 @@
 #include "COTP/COTP_main.h"
 int main(){
 
-    char key[CTOP_MAX] = {0};
     const char *secret = "ijsiofushaiuhsiuahuissahuhasusaupspausuasaipus";
 
+
+    char seed[200] ={0};
+    ctop_create_pseudo_random_seed(seed,secret, 1);
+    char key[CTOP_MAX] = {0};
     ctop_create_pseud_random_key(
             key,
-             secret,
-            1,
+            seed,
             CTOP_MAX,
             ctop_minutes(600000),
             CTOP_MAX,
