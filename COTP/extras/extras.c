@@ -46,3 +46,14 @@ int private_ctop_int_sub_str(const char *element,int start_point,int end_point){
     free(result);
     return result_formated;
 }
+
+unsigned  long long private_ctop_transform_string_in_number(const char* str) {
+    unsigned long hash = 5381;
+    int c;
+
+    while ((c = *str++)) {
+        hash = ((hash << 5) + hash) + c; // Fórmula de hash básica
+    }
+
+    return hash;
+}

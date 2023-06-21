@@ -25,7 +25,7 @@ char * ctop_create_key(
     free(seed_mark);
 
 
-    
+
     return result;
 
 }
