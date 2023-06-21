@@ -8,7 +8,7 @@ char * ctop_create_key(
         bool allow_letters
 ){
     char *sha_seed = calc_sha_256_from_file_returning_string(seed);
-    
+
 
 
 
