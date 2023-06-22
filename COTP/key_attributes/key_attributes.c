@@ -14,10 +14,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
     int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
-    int min_password_size = 5;
     int max_key_size = 64 +CTOP_DESCRIPTION_SIZE;
-    int max_password_size = 64;
-
 
     if(!attributes->allow_letters_on_key){
         max_key_size = 81 +CTOP_DESCRIPTION_SIZE;
@@ -27,6 +24,9 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
             min_key_size,
             max_key_size
     );
+
+    int min_password_size = 5;
+    int max_password_size = 64;
 
     if(!attributes->allow_letters_on_passowrd){
         max_password_size = 81;
@@ -58,6 +58,7 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     printf("allow letters on key_attributes: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
+
 void ctop_create_key(
         char *result,
         CtopKeyAttributes *attributes
@@ -95,7 +96,6 @@ void ctop_create_key(
         );
 
     }
-
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
 
     sprintf(result,
