@@ -14,12 +14,12 @@ int main(){
             secreet,
             time(NULL)
     );
-    key_attribtes.password_size = 3000;
-    key_attribtes.allow_letters_on_key = false;
-    //CtopKeyAttributes_represent_key_attributes(&key_attribtes);
-
+    key_attribtes.key_size =50;
+    CtopKeyAttributes_represent_key_attributes(&key_attribtes);
+    printf("---------------------------\n");
     char key[CTOP_MAX] = {0};
     ctop_create_key(key,&key_attribtes);
-    printf("%s\n",key);
-
+    printf("key%s\n", key);
+    
+    printf("key size %ld\n", strlen(key));
 }

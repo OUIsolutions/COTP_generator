@@ -3,6 +3,8 @@
 
 #define CTOP_MAX 100
 
+#define CTOP_DESCRIPTION_SIZE 13
+
 
 typedef struct CtopKeyAttributes{
     char seed[200];

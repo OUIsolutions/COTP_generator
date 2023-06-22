@@ -5,7 +5,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
-    attributes->key_size = 81;
+    attributes->key_size = 81 + CTOP_DESCRIPTION_SIZE;
     attributes->interval = interval;
     attributes->password_size = 20;
 
@@ -13,13 +13,20 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
-    int min_size = 5;
-    int max_key_size = 64;
+    int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
+    int min_password_size = 5;
+    int max_key_size = 64 +CTOP_DESCRIPTION_SIZE;
     int max_password_size = 64;
 
+
     if(!attributes->allow_letters_on_key){
-        max_key_size = 81;
+        max_key_size = 81 +CTOP_DESCRIPTION_SIZE;
     }
+    attributes->key_size = private_ctop_sanitize_range(
+            attributes->key_size,
+            min_key_size,
+            max_key_size
+    );
 
     if(!attributes->allow_letters_on_passowrd){
         max_password_size = 81;
@@ -27,15 +34,10 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
     attributes->password_size = private_ctop_sanitize_range(
             attributes->password_size,
-            min_size,
+            min_password_size,
             max_password_size
     );
 
-    attributes->key_size = private_ctop_sanitize_range(
-            attributes->key_size,
-            min_size,
-            max_key_size
-    );
 }
 
 CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
@@ -78,18 +80,23 @@ void ctop_create_key(
 
 
     if(attributes->allow_letters_on_key){
+
         private_ctop_calc_sha_256_generating_string(
                 sha_of_seed,
                 attributes->seed
         );
+
     }
     else{
+
         private_ctop_calc_sha_256_generating_number(
                 sha_of_seed,
                 attributes->seed
         );
+
     }
-    private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size);
+
+    private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
 
     sprintf(result,
             "%s%s%s%d",
