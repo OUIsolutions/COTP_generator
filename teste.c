@@ -15,10 +15,11 @@ int main(){
             time(NULL)
     );
     key_attribtes.password_size = 3000;
-    //key_attribtes.allow_letters_on_key = false;
+    key_attribtes.allow_letters_on_key = false;
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
 
     char key[200] = {0};
-    ctop_create_key(key,&key_attribtes);
-    printf("%s\n",key);
+    //ctop_create_key(key,&key_attribtes);
+    //printf("%s\n",key);
+    private_ctop_calc_sha_256_generating_number(key,"aaaaa");
 }

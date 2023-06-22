@@ -62,7 +62,7 @@ void ctop_create_key(
     private_ctop_sanitize_attributes(attributes);
     //creating the elements
 
-    char interval[10] = {0};
+    char interval[11] = {0};
     private_ctop_format_num(interval,attributes->interval,10);
 
     char password_size[3] = {0};
@@ -70,8 +70,8 @@ void ctop_create_key(
 
 
 
-    char sha_of_seed[65] = {0};
-    char seed[65] = {0};
+    char sha_of_seed[200] = {0};
+    char seed[200] = {0};
 
     if(attributes->allow_letters_on_key){
         private_ctop_calc_sha_256_generating_string(
@@ -89,11 +89,12 @@ void ctop_create_key(
     }
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size);
 
-    sprintf(result,"%s%s%d%s",
+    sprintf(result,
+            "%s%s%d%s",
             interval,
             password_size,
             attributes->allow_letters_on_passowrd,
             seed
-    );
+            );
 
 }

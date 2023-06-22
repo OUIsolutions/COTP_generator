@@ -24,22 +24,23 @@ void  private_ctop_format_num(char *result,int num,int num_size){
     result[result_size] = '\0';
 }
 
-void  private_ctop_calc_sha_256_generating_string(char *hash_string, const void *input, size_t len){
+void  private_ctop_calc_sha_256_generating_string(char *hash_string, const char *input){
     uint8_t hash[SIZE_OF_SHA_256_HASH];
 
-    calc_sha_256(hash, input, len);
+    calc_sha_256(hash, input, strlen(input));
     for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
         sprintf(hash_string + i * 2, "%02x", hash[i]);
     }
 }
-void  private_ctop_calc_sha_256_generating_number(char *hash_string, const void *input, size_t len){
+void  private_ctop_calc_sha_256_generating_number(char *hash_string, const char *input){
     uint8_t hash[SIZE_OF_SHA_256_HASH];
-    calc_sha_256(hash, input, len);
+
+    calc_sha_256(hash, input, strlen(input));
     for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
         sprintf(hash_string + i * 2, "%d", hash[i]);
     }
-
 }
+
 void private_ctop_sub_str(char *result,const char *element,int start_point,int end_point){
 
     int result_size = 0;
