@@ -1,4 +1,3 @@
-#include "sha-256.h"
 
 #define TOTAL_LEN_LEN 8
 
@@ -136,7 +135,7 @@ void sha_256_write(struct Sha_256 *sha_256, const void *data, size_t len)
 {
     sha_256->total_len += len;
 
-    const uint8_t *p = data;
+    const uint8_t *p = (uint8_t*)data;
 
     while (len > 0) {
         /*

@@ -5,7 +5,7 @@
 
 
 typedef struct CtopKeyAttributes{
-    char seed[100];
+    char seed[200];
     int interval;
     int key_size;
     int password_size;
