@@ -18,6 +18,8 @@ void ctop_create_seed_from_long(CtopKeyAttributes *attributes, const char *secre
 void ctop_create_seed_from_string(CtopKeyAttributes *attributes, const char *secret, const char *second_secret);
 
 
+void ctop_create_represent_seed(CtopKeyAttributes *attributes);
+
 
 void ctop_create_pseud_random_key(
         char *result,

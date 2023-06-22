@@ -12,7 +12,13 @@ void ctop_create_seed_from_string(CtopKeyAttributes *attributes, const char *sec
     strcpy(attributes->seed,seed);
 }
 
-
+void ctop_represent_seed(CtopKeyAttributes *attributes){
+    printf("seed: %s\n",attributes->seed);
+    printf("interval: %d\n",attributes->interval);
+    printf("password_size: %d\n",attributes->password_size);
+    printf("allow letters on key: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
+}
 /*
 void ctop_create_pseud_random_key(
         char *result,
