@@ -5,7 +5,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
-    attributes->key_size = 64;
+    attributes->key_size = 81;
     attributes->interval = interval;
     attributes->password_size = 20;
 
@@ -14,8 +14,9 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
     int min_size = 5;
-    int max_key_size = 64;
-    int max_password_size = 64;
+    int max_key_size = 81;
+    int max_password_size = 81;
+
 
     if(!attributes->allow_letters_on_key){
         max_key_size = 19;
@@ -76,15 +77,13 @@ void ctop_create_key(
     if(attributes->allow_letters_on_key){
         private_ctop_calc_sha_256_generating_string(
                 sha_of_seed,
-                attributes->seed,
-                strlen(attributes->seed)
+                attributes->seed
         );
     }
     else{
         private_ctop_calc_sha_256_generating_number(
                 sha_of_seed,
-                attributes->seed,
-                strlen(attributes->seed)
+                attributes->seed
         );
     }
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size);

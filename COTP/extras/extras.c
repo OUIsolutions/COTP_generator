@@ -32,12 +32,20 @@ void  private_ctop_calc_sha_256_generating_string(char *hash_string, const char 
         sprintf(hash_string + i * 2, "%02x", hash[i]);
     }
 }
+
 void  private_ctop_calc_sha_256_generating_number(char *hash_string, const char *input){
-    uint8_t hash[SIZE_OF_SHA_256_HASH];
+    uint8_t hash[SIZE_OF_SHA_256_HASH] = {0};
 
     calc_sha_256(hash, input, strlen(input));
+
+    int hash_string_size = 0;
     for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
-        sprintf(hash_string + i * 2, "%d", hash[i]);
+
+        char result[5] = {0};
+        sprintf(result,"%d",hash[i]);
+        sprintf((hash_string + hash_string_size), "%s", result);
+        hash_string_size+= (int)strlen(result);
+
     }
 }
 
