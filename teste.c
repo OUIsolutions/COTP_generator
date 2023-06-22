@@ -10,6 +10,7 @@ int main(){
     char seed[200] ={0};
     ctop_create_seed_from_long(seed, secret, now);
     char key[CTOP_MAX] = {0};
+
     ctop_create_pseud_random_key(
             key,
             seed,

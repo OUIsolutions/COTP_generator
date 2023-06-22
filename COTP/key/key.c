@@ -1,12 +1,19 @@
 
 
-void ctop_create_seed_from_long(char *result, const char *secret, unsigned  long current_time){
-    sprintf(result,"%s%ld",secret, current_time);
+
+void ctop_create_seed_from_long(CtopKeyAttributes *attributes, const char *secret, unsigned  long current_time){
+    char seed[100] = {0};
+    sprintf(seed,"%s%ld",secret,current_time);
+    strcpy(attributes->seed,seed);
 }
-void ctop_create_seed_from_string(char *result, const char *secret, const char *second_secret){
-    sprintf(result,"%s%s",secret,second_secret);
+void ctop_create_seed_from_string(CtopKeyAttributes *attributes, const char *secret, const char *second_secret){
+    char seed[100] = {0};
+    sprintf(seed,"%s%s",secret,second_secret);
+    strcpy(attributes->seed,seed);
 }
 
+
+/*
 void ctop_create_pseud_random_key(
         char *result,
         const char *seed,
@@ -80,7 +87,7 @@ void ctop_create_pseud_random_key(
     printf("\tseed:%s\n",result);
 #endif
 }
-
+/**
 void ctop_get_passowrd(char *result,const char *keey){
 
     int acumulator = 0;
@@ -107,3 +114,4 @@ void ctop_get_passowrd(char *result,const char *keey){
     acumulator+=key_size;
 
 }
+ */
