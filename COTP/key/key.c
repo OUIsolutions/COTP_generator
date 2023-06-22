@@ -1,24 +1,42 @@
 
 
 
-void ctop_create_seed_from_long(CtopKeyAttributes *attributes, const char *secret, unsigned  long current_time){
-    char seed[100] = {0};
-    sprintf(seed,"%s%ld",secret,current_time);
-    strcpy(attributes->seed,seed);
-}
-void ctop_create_seed_from_string(CtopKeyAttributes *attributes, const char *secret, const char *second_secret){
-    char seed[100] = {0};
-    sprintf(seed,"%s%s",secret,second_secret);
-    strcpy(attributes->seed,seed);
+void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval){
+    attributes->allow_letters_on_key = true;
+    attributes->allow_letters_on_passowrd = true;
+    attributes->key_size = 64;
+    attributes->interval = interval;
+    attributes->password_size = 20;
 }
 
-void ctop_represent_seed(CtopKeyAttributes *attributes){
+CtopKeyAttributes newCtopKeyAttributes_from_long(int interval, const char *secret, unsigned  long current_time){
+    CtopKeyAttributes keey_attributes;
+    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
+    char seed[100] = {0};
+    sprintf(seed,"%s%ld",secret,current_time);
+    strcpy(keey_attributes.seed,seed);
+    return keey_attributes;
+}
+
+CtopKeyAttributes newCtopKeyAttributes_from_string(int interval,const char *secret, const char *second_secret){
+    CtopKeyAttributes keey_attributes;
+    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
+    char seed[100] = {0};
+    sprintf(seed,"%s%s",secret,second_secret);
+    strcpy(keey_attributes.seed,seed);
+    return keey_attributes;
+}
+
+void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
+
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("password_size: %d\n",attributes->password_size);
     printf("allow letters on key: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
+
+
 /*
 void ctop_create_pseud_random_key(
         char *result,
