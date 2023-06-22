@@ -28,7 +28,7 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
     attributes->key_size = private_ctop_sanitize_range(
             attributes->key_size,
             min_size,
-            max_password_size
+            max_key_size
     );
 }
 
@@ -41,7 +41,7 @@ CtopKeyAttributes newCtopKeyAttributes_from_time(int interval, const char *secre
 
 
 void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
-
+    private_ctop_sanitize_attributes(attributes);
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);

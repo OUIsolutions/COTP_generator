@@ -14,7 +14,7 @@ int main(){
             secreet,
             time(NULL)
     );
-
+    key_attribtes.password_size = 3000;
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
 
 }
