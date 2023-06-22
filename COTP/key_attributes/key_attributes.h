@@ -16,10 +16,7 @@ typedef struct CtopKeyAttributes{
 void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval);
 
 
-CtopKeyAttributes newCtopKeyAttributes_from_long(int interval, const char *secret, unsigned  long current_time);
-
-CtopKeyAttributes newCtopKeyAttributes_from_string(int interval,const char *secret, const char *second_secret);
-
+CtopKeyAttributes newCtopKeyAttributes_from_time(int interval, const char *secret, unsigned  long current_time);
 
 
 void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes);

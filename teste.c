@@ -6,6 +6,13 @@
 int main(){
 
     const char *secreet = "akisjioajsidjioasidais";
-    CtopKeyAttributes  key_attribtes = newCtopKeyAttributes_from_long(10,secreet, time(NULL));
+    int interval = 10;
+    CtopKeyAttributes  key_attribtes = newCtopKeyAttributes_from_time(
+            interval,
+            secreet,
+            time(NULL)
+    );
+
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
+    
 }

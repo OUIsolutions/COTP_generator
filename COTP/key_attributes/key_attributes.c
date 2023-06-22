@@ -9,7 +9,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
     attributes->password_size = 20;
 }
 
-CtopKeyAttributes newCtopKeyAttributes_from_long(int interval, const char *secret, unsigned  long current_time){
+CtopKeyAttributes newCtopKeyAttributes_from_time(int interval, const char *secret, unsigned  long current_time){
     CtopKeyAttributes keey_attributes;
     private_ctop_initialize_key_attribtes(&keey_attributes,interval);
     char seed[100] = {0};
@@ -18,14 +18,6 @@ CtopKeyAttributes newCtopKeyAttributes_from_long(int interval, const char *secre
     return keey_attributes;
 }
 
-CtopKeyAttributes newCtopKeyAttributes_from_string(int interval,const char *secret, const char *second_secret){
-    CtopKeyAttributes keey_attributes;
-    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
-    char seed[100] = {0};
-    sprintf(seed,"%s%s",secret,second_secret);
-    strcpy(keey_attributes.seed,seed);
-    return keey_attributes;
-}
 
 void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
 
