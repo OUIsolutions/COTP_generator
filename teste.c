@@ -23,7 +23,4 @@ int main(){
     printf("key: %s\n", key);
     printf("----------- Key parsing ----------------\n");
 
-    CtopKeyAttributes parsed = ctop_parse_key(key);
-    CtopKeyAttributes_represent_key_attributes(&parsed);
-
 }

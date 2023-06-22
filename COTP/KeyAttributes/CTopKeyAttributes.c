@@ -13,12 +13,12 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
 
 CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
-
     CtopKeyAttributes keey_attributes = {0};
     private_ctop_initialize_key_attribtes(&keey_attributes,interval);
     sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
     return keey_attributes;
 }
+
 
 CtopKeyAttributes ctop_parse_key(const char *key){
     CtopKeyAttributes keey_attributes = {0};
@@ -72,7 +72,7 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);
     printf("password_size: %d\n",attributes->password_size);
-    printf("allow letters on key_attributes: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on KeyAttributes: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
@@ -113,6 +113,7 @@ void ctop_create_key(
         );
 
     }
+
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
 
     sprintf(key,
@@ -121,6 +122,6 @@ void ctop_create_key(
             interval,
             password_size,
             attributes->allow_letters_on_passowrd
-            );
+    );
 
 }
