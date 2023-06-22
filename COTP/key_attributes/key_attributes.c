@@ -11,6 +11,31 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
 }
 
+
+CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
+
+    CtopKeyAttributes keey_attributes = {0};
+    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
+    sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
+    return keey_attributes;
+}
+
+CtopKeyAttributes ctop_parse_key(const char *key){
+    CtopKeyAttributes keey_attributes = {0};
+    keey_attributes.key_size =strlen(key);
+    int sha_size  = keey_attributes.key_size - CTOP_DESCRIPTION_SIZE;
+
+    private_ctop_sub_str(
+             keey_attributes.seed,
+             key,
+             0,
+             sha_size
+    );
+    return  keey_attributes;
+
+
+}
+
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
     int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
@@ -40,14 +65,6 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
 }
 
-CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
-
-    CtopKeyAttributes keey_attributes = {0};
-    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
-    sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
-    return keey_attributes;
-}
-
 
 void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     private_ctop_sanitize_attributes(attributes);
@@ -60,7 +77,7 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
 }
 
 void ctop_create_key(
-        char *result,
+        char *key,
         CtopKeyAttributes *attributes
 ){
 
@@ -98,7 +115,7 @@ void ctop_create_key(
     }
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
 
-    sprintf(result,
+    sprintf(key,
             "%s%s%s%d",
             seed,
             interval,

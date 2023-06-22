@@ -6,20 +6,24 @@
 
 
 int main(){
-
+    printf("----------- Key Construction ----------------\n");
     const char *secreet = "akisjioajsidjioasidais";
     int interval = ctops_days(500);
+
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
             secreet,
             time(NULL)
     );
-    key_attribtes.key_size =30;
+
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
-    printf("---------------------------\n");
+    printf("----------- Key Generation ----------------\n");
     char key[CTOP_MAX] = {0};
     ctop_create_key(key,&key_attribtes);
     printf("key: %s\n", key);
+    printf("----------- Key parsing ----------------\n");
 
-    printf("key size %ld\n", strlen(key));
+    CtopKeyAttributes parsed = ctop_parse_key(key);
+    CtopKeyAttributes_represent_key_attributes(&parsed);
+
 }
