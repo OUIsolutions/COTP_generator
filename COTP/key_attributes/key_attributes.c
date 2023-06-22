@@ -32,7 +32,7 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("password_size: %d\n",attributes->password_size);
-    printf("allow letters on key: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on key_attributes: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
@@ -48,7 +48,7 @@ void ctop_create_pseud_random_key(
         bool allow_letters_on_password
 ){
 
-    char key[65] = {0};
+    char key_attributes[65] = {0};
     int generated_key_size;
     if(allow_letters_on_key){
         char sha_seed[65] = {0};
@@ -56,7 +56,7 @@ void ctop_create_pseud_random_key(
 
         generated_key_size = private_ctop_sanitize_range(key_size, 5 , 64);
         private_ctop_sub_str(
-                key,
+                key_attributes,
                 sha_seed,
                 0,
                 generated_key_size
@@ -70,10 +70,10 @@ void ctop_create_pseud_random_key(
         generated_key_size = private_ctop_sanitize_range(key_size, 5, 19);
         char temporary_key[20] ={0};
         sprintf(temporary_key,"%lu",seed_in_int);
-        private_ctop_sub_str(key, temporary_key, 0, generated_key_size);
+        private_ctop_sub_str(key_attributes, temporary_key, 0, generated_key_size);
 
     }
-    printf("key_size: %d\n", strlen(key));
+    printf("key_size: %d\n", strlen(key_attributes));
 
     char key_mark[3] = {0};
     private_ctop_format_num(key_mark, generated_key_size, 2);
@@ -93,7 +93,7 @@ void ctop_create_pseud_random_key(
 
     sprintf(result, "%s%s%s%s%s%d",
             key_mark,
-            key,
+            key_attributes,
             interval_mark,
             interval_string,
             password_size_formated,
@@ -102,8 +102,8 @@ void ctop_create_pseud_random_key(
 
 #ifdef CTOP_DEBUG
     printf("generating seed ----------------------------------------------------\n");
-    printf("\tkey mark:%s\n",key_mark);
-    printf("\tkey:%s\n",key);
+    printf("\tkey_attributes mark:%s\n",key_mark);
+    printf("\tkey_attributes:%s\n",key_attributes);
     printf("\tinterval mark:%s\n",interval_mark);
     printf("\tinterval:%s\n",interval_string);
     printf("\tpassword size:%s\n", password_size_formated);
@@ -119,8 +119,8 @@ void ctop_get_passowrd(char *result,const char *keey){
     private_ctop_sub_str(key_mark, keey, acumulator, 2);
     acumulator+=2;
     int key_size = atoi(key_mark);
-    char key[64] = {0};
-    private_ctop_sub_str(key, keey, acumulator, key_size + acumulator);
+    char key_attributes[64] = {0};
+    private_ctop_sub_str(key_attributes, keey, acumulator, key_size + acumulator);
     acumulator+=key_size;
     char interval_mark[3] = {0};
     private_ctop_sub_str(interval_mark, keey, acumulator, acumulator + 2);
@@ -129,8 +129,8 @@ void ctop_get_passowrd(char *result,const char *keey){
 
     #ifdef CTOP_DEBUG
         printf("generating password ----------------------------------------------------\n");
-        printf("\tkey mark:%s\n",key_mark);
-        printf("\tkey:%s\n",key);
+        printf("\tkey_attributes mark:%s\n",key_mark);
+        printf("\tkey_attributes:%s\n",key_attributes);
         printf("\tinterval mark:%s\n",interval_mark);
     #endif
 
