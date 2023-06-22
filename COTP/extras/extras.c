@@ -24,13 +24,21 @@ void  private_ctop_format_num(char *result,int num,int num_size){
     result[result_size] = '\0';
 }
 
-void  private_ctop_calc_sha_256_returning_string(char *hash_string, const void *input, size_t len){
+void  private_ctop_calc_sha_256_generating_string(char *hash_string, const void *input, size_t len){
     uint8_t hash[SIZE_OF_SHA_256_HASH];
 
     calc_sha_256(hash, input, len);
     for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
         sprintf(hash_string + i * 2, "%02x", hash[i]);
     }
+}
+void  private_ctop_calc_sha_256_generating_number(char *hash_string, const void *input, size_t len){
+    uint8_t hash[SIZE_OF_SHA_256_HASH];
+    calc_sha_256(hash, input, len);
+    for (unsigned int i = 0; i < SIZE_OF_SHA_256_HASH; i++) {
+        sprintf(hash_string + i * 2, "%d", hash[i]);
+    }
+
 }
 void private_ctop_sub_str(char *result,const char *element,int start_point,int end_point){
 
@@ -49,17 +57,6 @@ int private_ctop_int_sub_str(const char *element,int start_point,int end_point){
     int result_formated;
     sscanf(result,"%d",&result_formated);
     return result_formated;
-}
-
-unsigned  long long private_ctop_transform_string_in_number(const char* str) {
-    unsigned long hash = 5381;
-    int c;
-
-    while ((c = *str++)) {
-        hash = ((hash << 5) + hash) + c; // Fórmula de hash básica
-    }
-
-    return hash;
 }
 
 

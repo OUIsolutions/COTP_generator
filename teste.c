@@ -8,13 +8,17 @@
 int main(){
 
     const char *secreet = "akisjioajsidjioasidais";
-    int interval = 10;
-    CtopKeyAttributes  key_attribtes = newCtopKeyAttributes_from_time(
+    int interval = ctops_days(500);
+    CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
             secreet,
             time(NULL)
     );
     key_attribtes.password_size = 3000;
+    //key_attribtes.allow_letters_on_key = false;
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
 
+    char key[200] = {0};
+    ctop_create_key(key,&key_attribtes);
+    printf("%s\n",key);
 }
