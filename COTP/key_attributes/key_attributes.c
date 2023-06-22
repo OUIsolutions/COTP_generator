@@ -92,11 +92,11 @@ void ctop_create_key(
     private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size);
 
     sprintf(result,
-            "%s%s%d%s",
+            "%s%s%s%d",
+            seed,
             interval,
             password_size,
-            attributes->allow_letters_on_passowrd,
-            seed
+            attributes->allow_letters_on_passowrd
             );
 
 }

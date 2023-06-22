@@ -15,7 +15,7 @@ int main(){
             time(NULL)
     );
     key_attribtes.password_size = 3000;
-    key_attribtes.allow_letters_on_key = true;
+    key_attribtes.allow_letters_on_key = false;
     //CtopKeyAttributes_represent_key_attributes(&key_attribtes);
 
     char key[CTOP_MAX] = {0};
