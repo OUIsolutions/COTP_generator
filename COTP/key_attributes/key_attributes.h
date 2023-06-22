@@ -16,6 +16,8 @@ typedef struct CtopKeyAttributes{
 void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval);
 
 
+void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes);
+
 CtopKeyAttributes newCtopKeyAttributes_from_time(int interval, const char *secret, unsigned  long current_time);
 
 
