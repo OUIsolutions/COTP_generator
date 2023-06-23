@@ -30,14 +30,7 @@ int main(){
     printf("----------- Getting password ----------------\n");
 
     char password[CTOP_MAX] = {0};
-    int now = 1;
-    int duration = 3;
-    int last_point  = (int)(now / duration) * duration;
-    int next_point = last_point + duration;
-    int remaning = next_point - now;
-    printf("last point :%i\n",last_point);
-    printf("next point :%i\n",next_point);
-    printf("remaning   :%i\n",remaning);
-
+    long remaning;
+    
 
 }
