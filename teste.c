@@ -1,22 +1,28 @@
-
-#include "COTPgenerator.h"
-
+//
+// Created by jurandi on 21-06-2023.
+//
+#define CTOP_DEBUG
+#include "COTP/COTP_main.h"
 
 int main(){
 
-    const char *key = "2fa4bb1ad83d3aacd2f5e645c0e6289b65bd5e84a7d0d623dd549f9ef7b691a300001800201";
+    //Not share these in any public repo
+    const char *secreet = "jisduohfuhusdh8q0j023233321";
+    //the interval betewen password changing
+    int interval = cotp_minutes(1);
+    long now = time(NULL);
 
-    char password[COTP_MAX]  = {0};
-    int time_remaning;
+    COTPKeyAttributes  key_attribtes = newCOTPKeyAttribute(
+            interval,
+            secreet,
+            now
+    );
+
+    char key[COTP_MAX] = {0};
 
 
-    while(true){
-        system("clear");
+    cotp_create_key(key, &key_attribtes);
+    printf("save these key:\n%s\n", key);
+    return 0;
 
-        long now = time(NULL);
-        cotp_get_password(password,&time_remaning,key,now);
-        printf("password: %s\n",password);
-        printf("time remaning :%d\n",time_remaning);
-        sleep(1);
-    }
 }

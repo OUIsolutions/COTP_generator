@@ -70,6 +70,7 @@ void cotp_create_key(
     private_cotp_sanitize_attributes(attributes);
     //creating the elements
 
+
     char interval[9] = {0};
     private_cotp_format_num(interval, attributes->interval, 8);
 
