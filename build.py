@@ -52,6 +52,13 @@ def test_static_password():
         """
     )
 
+
+def test_static_custom_key():
+    test_execution(
+        f'{EXEMPLES}/static_custom_key.c',
+       '14817323945224231901655816816168160141200001800100'
+    )
+
 def test_exemples():
     ct.generate_amalgamated_code(STARTER,f'{EXEMPLES}/{OUTPUT}')
     ct.execute_test_for_file('gcc',f'{EXEMPLES}/random_key_generation.c')
@@ -61,6 +68,7 @@ def test_exemples():
     print('passed: custom_key.c')
     test_static_key_generation()
     test_static_password()
+    test_static_custom_key()
 
 
 

@@ -12,9 +12,14 @@ int main(){
             secreet,
             now
     );
+
+    //determines the size of the key
     key_attribtes.key_size = 50;
+    //determines the size of the password
     key_attribtes.password_size = 10;
+    //determines if the password will have latters
     key_attribtes.allow_letters_on_passowrd = false;
+    //determines if the key will have letters
     key_attribtes.allow_letters_on_key = false;
 
     char key[COTP_MAX] = {0};
