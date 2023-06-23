@@ -1,3 +1,6 @@
+//
+// Created by jurandi on 23-06-2023.
+//
 
 #include "COTPgenerator.h"
 
@@ -9,7 +12,6 @@ int main(){
     char password[COTP_MAX]  = {0};
     int time_remaning;
 
-    
     while(true){
         system("clear");
 

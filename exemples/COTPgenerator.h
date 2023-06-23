@@ -356,6 +356,8 @@ void calc_sha_256(uint8_t hash[SIZE_OF_SHA_256_HASH], const void *input, size_t 
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 #include <stdbool.h>
 
 
