@@ -24,14 +24,13 @@ int main(){
     printf("key: %s\n", key);
     printf("----------- Key parsing ----------------\n");
 
-    CTopParsedKey parsed_key = ctop_parse_key(key);
-    CTopParsedKey_reprsent(&parsed_key);
-    printf("----------- Getting password ----------------\n");
+    COTParsedKey parsed_key = cotp_parse_key(key);
+    COTPParsedKey_reprsent(&parsed_key);
 
+    printf("----------- Getting password ----------------\n");
     char password[CTOP_MAX] = {0};
     int remaning;
-    ctop_get_password(password,&remaning,key,time(NULL));
-
+    cotp_get_password(password, &remaning, key, time(NULL));
     printf("password: %s\n",password);
     printf("remaning: %d\n",remaning);
 

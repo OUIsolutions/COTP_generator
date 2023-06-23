@@ -430,13 +430,13 @@ typedef struct CTopParsedKey{
     bool allow_letters_on_passowrd;
 }CTopParsedKey;
 
-CTopParsedKey ctop_parse_key(const char *key);
+CTopParsedKey cotp_parse_key(const char *key);
 
 void CTopParsedKey_reprsent(CTopParsedKey *parsed_key);
 
 void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time);
 
-void ctop_get_password(char *password,int *time_ramaing,const char *key,long actual_time);
+void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time);
 
 
 
@@ -639,7 +639,7 @@ void ctop_create_key(
 
 
 
-CTopParsedKey ctop_parse_key(const char *key){
+CTopParsedKey cotp_parse_key(const char *key){
 
     CTopParsedKey parsed_key = {0};
     int key_size = (int)strlen(key);
@@ -699,7 +699,7 @@ void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *ti
 }
 
 
-void ctop_get_password(char *password,int *time_ramaing,const char *key,long actual_time){
+void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time){
     CTopParsedKey parsed_key = ctop_parse_key(key);
     CTopParsedKey_get_password(&parsed_key,password,time_ramaing,actual_time);
 }

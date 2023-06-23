@@ -1,7 +1,7 @@
 
-CTopParsedKey ctop_parse_key(const char *key){
+COTParsedKey cotp_parse_key(const char *key){
 
-    CTopParsedKey parsed_key = {0};
+    COTParsedKey parsed_key = {0};
     int key_size = (int)strlen(key);
     int sha_point = key_size - CTOP_DESCRIPTION_SIZE;
 
@@ -28,7 +28,7 @@ CTopParsedKey ctop_parse_key(const char *key){
 
 }
 
-void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
+void COTPParsedKey_reprsent(COTParsedKey *parsed_key){
     printf("generated sha: %s\n",parsed_key->generated_sha);
     printf("interval: %d\n",parsed_key->interval);
     printf("password size: %d\n",parsed_key->password_size);
@@ -36,7 +36,7 @@ void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
 }
 
 
-void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time){
+void COTParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *time_ramaing, long actual_time){
 
     long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
     long next_point = last_point + parsed_key->interval;
@@ -59,7 +59,7 @@ void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *ti
 }
 
 
-void ctop_get_password(char *password,int *time_ramaing,const char *key,long actual_time){
-    CTopParsedKey parsed_key = ctop_parse_key(key);
-    CTopParsedKey_get_password(&parsed_key,password,time_ramaing,actual_time);
+void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time){
+    COTParsedKey parsed_key = cotp_parse_key(key);
+    COTParsedKey_get_password(&parsed_key, password, time_ramaing, actual_time);
 }
