@@ -83,3 +83,4 @@ def test_exemples():
 
 test_exemples()
 amalgamated_code = ct.generate_amalgamated_code(STARTER,OUTPUT)
+ct.include_code_in_markdown('README.md',True)
