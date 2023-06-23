@@ -56,6 +56,22 @@ void COTPParsedKey_get_password(COTPKey *parsed_key, char *password, int *time_r
     private_cotp_sub_str(password, generated_sha, 0, parsed_key->password_size);
 }
 
+void COTPKey_object_create_key_string(char *key,COTPKey *parsed_key){
+    char interval[9] = {0};
+    private_cotp_format_num(interval, parsed_key->interval, 8);
+
+    char password_size[3] = {0};
+    private_cotp_format_num(password_size, parsed_key->password_size, 2);
+
+
+    sprintf(key,
+            "%s%s%s%d",
+            parsed_key->generated_sha,
+            interval,
+            password_size,
+            parsed_key->allow_letters_on_passowrd
+    );
+}
 
 void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time){
     COTPKey parsed_key = cotp_parse_key(key);

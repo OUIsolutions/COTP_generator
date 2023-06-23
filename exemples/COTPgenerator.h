@@ -416,7 +416,7 @@ void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes);
 
 void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes);
 
-void cotp_create_key(
+void cotp_create_key_string_from_attributes(
         char *key,
         COTPKeyAttributes *attributes
 );
@@ -589,7 +589,7 @@ void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes){
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
-void cotp_create_key(
+void cotp_create_key_string_from_attributes(
         char *key,
         COTPKeyAttributes *attributes
 ){
