@@ -11,17 +11,17 @@ int main(){
     const char *secreet = "akisjioajsidjioasidaisr";
     int interval = cotp_minutes(1);
 
-    COTPKeyAttributes  key_attribtes = newCtopKeyAttribute(
+    COTPKeyAttributes  key_attribtes = newCOTPKeyAttribute(
             interval,
             secreet,
-    1
+            1
     );
 
 
-    CtopKeyAttributes_represent_key_attributes(&key_attribtes);
+    COTPKeyAttributes_represent_key_attributes(&key_attribtes);
 
     printf("----------- Key Generation ----------------\n");
-    char key[CTOP_MAX] = {0};
+    char key[COTP_MAX] = {0};
     cotp_create_key(key, &key_attribtes);
     printf("key: %s\n", key);
     printf("----------- Key parsing ----------------\n");
@@ -30,7 +30,7 @@ int main(){
     COTPParsedKey_reprsent(&parsed_key);
 
     printf("----------- Getting password ----------------\n");
-    char password[CTOP_MAX] = {0};
+    char password[COTP_MAX] = {0};
     int remaning;
     cotp_get_password(password, &remaning, key, time(NULL));
     printf("password: %s\n",password);

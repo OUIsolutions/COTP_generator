@@ -1,9 +1,9 @@
 
 
 
-#define CTOP_MAX 100
+#define COTP_MAX 100
 
-#define CTOP_DESCRIPTION_SIZE 11
+#define COTP_DESCRIPTION_SIZE 11
 
 
 typedef struct COTPKeyAttributes{
@@ -16,16 +16,16 @@ typedef struct COTPKeyAttributes{
     bool allow_letters_on_key;
 }COTPKeyAttributes;
 
-void private_ctop_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval);
+void private_cotp_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval);
 
 
-COTPKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time);
+COTPKeyAttributes newCOTPKeyAttribute(int interval, const char *secret, unsigned  long current_time);
 
 
 void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes);
 
 
-void CtopKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes);
+void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes);
 
 void cotp_create_key(
         char *key,

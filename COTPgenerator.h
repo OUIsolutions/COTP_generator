@@ -24,8 +24,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-#ifndef CTOP_GENERATOR
-#define CTOP_GENERATOR
+#ifndef COTP_GENERATOR
+#define COTP_GENERATOR
 
 #ifndef SHA_256_H
 #define SHA_256_H
@@ -387,12 +387,12 @@ int cotp_days(int days);
 
 
 
-#define CTOP_MAX 100
+#define COTP_MAX 100
 
-#define CTOP_DESCRIPTION_SIZE 11
+#define COTP_DESCRIPTION_SIZE 11
 
 
-typedef struct CtopKeyAttributes{
+typedef struct COTPKeyAttributes{
     char seed[200];
     int interval;
     int password_size;
@@ -400,41 +400,40 @@ typedef struct CtopKeyAttributes{
     bool allow_letters_on_passowrd;
 
     bool allow_letters_on_key;
-}CtopKeyAttributes;
+}COTPKeyAttributes;
 
-void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval);
-
-
-CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time);
+void private_cotp_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval);
 
 
-
-void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes);
-
-void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes);
+COTPKeyAttributes newCOTPKeyAttribute(int interval, const char *secret, unsigned  long current_time);
 
 
-void ctop_create_key(
+void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes);
+
+
+void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes);
+
+void cotp_create_key(
         char *key,
-        CtopKeyAttributes *attributes
+        COTPKeyAttributes *attributes
 );
 
 
 
 
 
-typedef struct CTopParsedKey{
+typedef struct COTParsedKey{
     char generated_sha[81];
     int interval;
     int password_size;
     bool allow_letters_on_passowrd;
-}CTopParsedKey;
+}COTParsedKey;
 
-CTopParsedKey cotp_parse_key(const char *key);
+COTParsedKey cotp_parse_key(const char *key);
 
-void CTopParsedKey_reprsent(CTopParsedKey *parsed_key);
+void COTPParsedKey_reprsent(COTParsedKey *parsed_key);
 
-void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time);
+void COTPParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *time_ramaing, long actual_time);
 
 void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time);
 
@@ -502,7 +501,7 @@ void private_cotp_sub_str(char *result, const char *element, int start_point, in
 
 int private_cotp_int_sub_str(const char *element, int start_point, int end_point){
     char result[10]= {0};
-    private_ctop_sub_str(result,element,start_point,end_point);
+    private_cotp_sub_str(result, element, start_point, end_point);
     int result_formated;
     sscanf(result,"%d",&result_formated);
     return result_formated;
@@ -517,45 +516,45 @@ int cotp_minutes(int minutes){
     return minutes * 60;
 }
 int copt_hours(int hours){
-    return ctop_minutes(60) * hours;
+    return cotp_minutes(60) * hours;
 }
 int cotp_days(int days){
-    return ctop_hours(24) * days;
+    return copt_hours(24) * days;
 }
 
 
 
 
 
-void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval){
+void private_cotp_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval){
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
-    attributes->key_size = CTOP_MAX;
+    attributes->key_size = COTP_MAX;
     attributes->interval = interval;
     attributes->password_size = 20;
 
 }
 
 
-CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
-    CtopKeyAttributes keey_attributes = {0};
-    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
+COTPKeyAttributes newCOTPKeyAttribute(int interval, const char *secret, unsigned  long current_time){
+    COTPKeyAttributes keey_attributes = {0};
+    private_cotp_initialize_key_attribtes(&keey_attributes, interval);
     sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
     return keey_attributes;
 }
 
 
 
-void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
+void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes){
 
-    int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
-    int max_key_size = 64 +CTOP_DESCRIPTION_SIZE;
+    int min_key_size = 20 + COTP_DESCRIPTION_SIZE;
+    int max_key_size = 64 + COTP_DESCRIPTION_SIZE;
 
     if(!attributes->allow_letters_on_key){
-        max_key_size = 81 +CTOP_DESCRIPTION_SIZE;
+        max_key_size = 81 + COTP_DESCRIPTION_SIZE;
     }
-    attributes->key_size = private_ctop_sanitize_range(
+    attributes->key_size = private_cotp_sanitize_range(
             attributes->key_size,
             min_key_size,
             max_key_size
@@ -568,7 +567,7 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
         max_password_size = 81;
     }
 
-    attributes->password_size = private_ctop_sanitize_range(
+    attributes->password_size = private_cotp_sanitize_range(
             attributes->password_size,
             min_password_size,
             max_password_size
@@ -577,30 +576,30 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 }
 
 
-void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
-    private_ctop_sanitize_attributes(attributes);
+void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes){
+    private_cotp_sanitize_attributes(attributes);
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);
     printf("password_size: %d\n",attributes->password_size);
-    printf("allow letters on CTopKeyAttributes: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on  key: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
-void ctop_create_key(
+void cotp_create_key(
         char *key,
-        CtopKeyAttributes *attributes
+        COTPKeyAttributes *attributes
 ){
 
 
-    private_ctop_sanitize_attributes(attributes);
+    private_cotp_sanitize_attributes(attributes);
     //creating the elements
 
     char interval[9] = {0};
-    private_ctop_format_num(interval,attributes->interval,8);
+    private_cotp_format_num(interval, attributes->interval, 8);
 
     char password_size[3] = {0};
-    private_ctop_format_num(password_size,attributes->password_size,2);
+    private_cotp_format_num(password_size, attributes->password_size, 2);
 
 
 
@@ -610,7 +609,7 @@ void ctop_create_key(
 
     if(attributes->allow_letters_on_key){
 
-        private_ctop_calc_sha_256_generating_string(
+        private_cotp_calc_sha_256_generating_string(
                 sha_of_seed,
                 attributes->seed
         );
@@ -618,14 +617,14 @@ void ctop_create_key(
     }
     else{
 
-        private_ctop_calc_sha_256_generating_number(
+        private_cotp_calc_sha_256_generating_number(
                 sha_of_seed,
                 attributes->seed
         );
 
     }
 
-    private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
+    private_cotp_sub_str(seed, sha_of_seed, 0, attributes->key_size - COTP_DESCRIPTION_SIZE);
 
     sprintf(key,
             "%s%s%s%d",
@@ -639,22 +638,22 @@ void ctop_create_key(
 
 
 
-CTopParsedKey cotp_parse_key(const char *key){
+COTParsedKey cotp_parse_key(const char *key){
 
-    CTopParsedKey parsed_key = {0};
+    COTParsedKey parsed_key = {0};
     int key_size = (int)strlen(key);
-    int sha_point = key_size - CTOP_DESCRIPTION_SIZE;
+    int sha_point = key_size - COTP_DESCRIPTION_SIZE;
 
-    private_ctop_sub_str(
+    private_cotp_sub_str(
             parsed_key.generated_sha,
             key,
             0,
             sha_point
     );
     int interval_point = sha_point+8;
-    parsed_key.interval = private_ctop_int_sub_str(key,sha_point,interval_point);
+    parsed_key.interval = private_cotp_int_sub_str(key, sha_point, interval_point);
     int password_point = interval_point+2;
-    parsed_key.password_size =  private_ctop_int_sub_str(key,interval_point,password_point);
+    parsed_key.password_size = private_cotp_int_sub_str(key, interval_point, password_point);
 
     parsed_key.allow_letters_on_passowrd = false;
 
@@ -668,7 +667,7 @@ CTopParsedKey cotp_parse_key(const char *key){
 
 }
 
-void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
+void COTPParsedKey_reprsent(COTParsedKey *parsed_key){
     printf("generated sha: %s\n",parsed_key->generated_sha);
     printf("interval: %d\n",parsed_key->interval);
     printf("password size: %d\n",parsed_key->password_size);
@@ -676,7 +675,7 @@ void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
 }
 
 
-void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time){
+void COTPParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *time_ramaing, long actual_time){
 
     long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
     long next_point = last_point + parsed_key->interval;
@@ -689,19 +688,19 @@ void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *ti
 
     if(parsed_key->allow_letters_on_passowrd){
 
-        private_ctop_calc_sha_256_generating_string(generated_sha,generated_seed);
+        private_cotp_calc_sha_256_generating_string(generated_sha, generated_seed);
 
     }
     else{
-        private_ctop_calc_sha_256_generating_number(generated_sha,generated_seed);
+        private_cotp_calc_sha_256_generating_number(generated_sha, generated_seed);
     }
-    private_ctop_sub_str(password,generated_sha,0,parsed_key->password_size);
+    private_cotp_sub_str(password, generated_sha, 0, parsed_key->password_size);
 }
 
 
 void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time){
-    CTopParsedKey parsed_key = ctop_parse_key(key);
-    CTopParsedKey_get_password(&parsed_key,password,time_ramaing,actual_time);
+    COTParsedKey parsed_key = cotp_parse_key(key);
+    COTPParsedKey_get_password(&parsed_key, password, time_ramaing, actual_time);
 }
 
 

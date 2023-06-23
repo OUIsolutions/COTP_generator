@@ -3,7 +3,7 @@ COTParsedKey cotp_parse_key(const char *key){
 
     COTParsedKey parsed_key = {0};
     int key_size = (int)strlen(key);
-    int sha_point = key_size - CTOP_DESCRIPTION_SIZE;
+    int sha_point = key_size - COTP_DESCRIPTION_SIZE;
 
     private_cotp_sub_str(
             parsed_key.generated_sha,

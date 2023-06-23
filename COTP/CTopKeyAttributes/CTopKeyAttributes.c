@@ -1,20 +1,20 @@
 
 
 
-void private_ctop_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval){
+void private_cotp_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval){
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
-    attributes->key_size = CTOP_MAX;
+    attributes->key_size = COTP_MAX;
     attributes->interval = interval;
     attributes->password_size = 20;
 
 }
 
 
-COTPKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
+COTPKeyAttributes newCOTPKeyAttribute(int interval, const char *secret, unsigned  long current_time){
     COTPKeyAttributes keey_attributes = {0};
-    private_ctop_initialize_key_attribtes(&keey_attributes,interval);
+    private_cotp_initialize_key_attribtes(&keey_attributes, interval);
     sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
     return keey_attributes;
 }
@@ -23,11 +23,11 @@ COTPKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned
 
 void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes){
 
-    int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
-    int max_key_size = 64 +CTOP_DESCRIPTION_SIZE;
+    int min_key_size = 20 + COTP_DESCRIPTION_SIZE;
+    int max_key_size = 64 + COTP_DESCRIPTION_SIZE;
 
     if(!attributes->allow_letters_on_key){
-        max_key_size = 81 +CTOP_DESCRIPTION_SIZE;
+        max_key_size = 81 + COTP_DESCRIPTION_SIZE;
     }
     attributes->key_size = private_cotp_sanitize_range(
             attributes->key_size,
@@ -51,13 +51,13 @@ void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes){
 }
 
 
-void CtopKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes){
+void COTPKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes){
     private_cotp_sanitize_attributes(attributes);
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);
     printf("password_size: %d\n",attributes->password_size);
-    printf("allow letters on CTopKeyAttributes: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on  key: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
@@ -99,7 +99,7 @@ void cotp_create_key(
 
     }
 
-    private_cotp_sub_str(seed, sha_of_seed, 0, attributes->key_size - CTOP_DESCRIPTION_SIZE);
+    private_cotp_sub_str(seed, sha_of_seed, 0, attributes->key_size - COTP_DESCRIPTION_SIZE);
 
     sprintf(key,
             "%s%s%s%d",
