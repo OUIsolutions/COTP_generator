@@ -9,7 +9,7 @@ int main(){
     printf("----------- Key Construction ----------------\n");
 
     const char *secreet = "akisjioajsidjioasidaisr";
-    int interval = ctop_minutes(1);
+    int interval = cotp_minutes(1);
 
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,

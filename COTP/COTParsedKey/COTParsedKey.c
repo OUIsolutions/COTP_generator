@@ -5,16 +5,16 @@ COTParsedKey cotp_parse_key(const char *key){
     int key_size = (int)strlen(key);
     int sha_point = key_size - CTOP_DESCRIPTION_SIZE;
 
-    private_ctop_sub_str(
+    private_cotp_sub_str(
             parsed_key.generated_sha,
             key,
             0,
             sha_point
     );
     int interval_point = sha_point+8;
-    parsed_key.interval = private_ctop_int_sub_str(key,sha_point,interval_point);
+    parsed_key.interval = private_cotp_int_sub_str(key, sha_point, interval_point);
     int password_point = interval_point+2;
-    parsed_key.password_size =  private_ctop_int_sub_str(key,interval_point,password_point);
+    parsed_key.password_size = private_cotp_int_sub_str(key, interval_point, password_point);
 
     parsed_key.allow_letters_on_passowrd = false;
 
@@ -49,13 +49,13 @@ void COTParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *ti
 
     if(parsed_key->allow_letters_on_passowrd){
 
-        private_ctop_calc_sha_256_generating_string(generated_sha,generated_seed);
+        private_cotp_calc_sha_256_generating_string(generated_sha, generated_seed);
 
     }
     else{
-        private_ctop_calc_sha_256_generating_number(generated_sha,generated_seed);
+        private_cotp_calc_sha_256_generating_number(generated_sha, generated_seed);
     }
-    private_ctop_sub_str(password,generated_sha,0,parsed_key->password_size);
+    private_cotp_sub_str(password, generated_sha, 0, parsed_key->password_size);
 }
 
 

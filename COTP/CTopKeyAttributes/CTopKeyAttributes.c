@@ -29,7 +29,7 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
     if(!attributes->allow_letters_on_key){
         max_key_size = 81 +CTOP_DESCRIPTION_SIZE;
     }
-    attributes->key_size = private_ctop_sanitize_range(
+    attributes->key_size = private_cotp_sanitize_range(
             attributes->key_size,
             min_key_size,
             max_key_size
@@ -42,7 +42,7 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
         max_password_size = 81;
     }
 
-    attributes->password_size = private_ctop_sanitize_range(
+    attributes->password_size = private_cotp_sanitize_range(
             attributes->password_size,
             min_password_size,
             max_password_size
@@ -71,10 +71,10 @@ void ctop_create_key(
     //creating the elements
 
     char interval[9] = {0};
-    private_ctop_format_num(interval,attributes->interval,8);
+    private_cotp_format_num(interval, attributes->interval, 8);
 
     char password_size[3] = {0};
-    private_ctop_format_num(password_size,attributes->password_size,2);
+    private_cotp_format_num(password_size, attributes->password_size, 2);
 
 
 
@@ -84,7 +84,7 @@ void ctop_create_key(
 
     if(attributes->allow_letters_on_key){
 
-        private_ctop_calc_sha_256_generating_string(
+        private_cotp_calc_sha_256_generating_string(
                 sha_of_seed,
                 attributes->seed
         );
@@ -92,14 +92,14 @@ void ctop_create_key(
     }
     else{
 
-        private_ctop_calc_sha_256_generating_number(
+        private_cotp_calc_sha_256_generating_number(
                 sha_of_seed,
                 attributes->seed
         );
 
     }
 
-    private_ctop_sub_str(seed,sha_of_seed,0,attributes->key_size - CTOP_DESCRIPTION_SIZE);
+    private_cotp_sub_str(seed, sha_of_seed, 0, attributes->key_size - CTOP_DESCRIPTION_SIZE);
 
     sprintf(key,
             "%s%s%s%d",
