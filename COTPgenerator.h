@@ -434,6 +434,10 @@ CTopParsedKey ctop_parse_key(const char *key);
 
 void CTopParsedKey_reprsent(CTopParsedKey *parsed_key);
 
+void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time);
+
+void ctop_get_password(char *password,int *time_ramaing,const char *key,long actual_time);
+
 
 
 
@@ -670,5 +674,35 @@ void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
     printf("password size: %d\n",parsed_key->password_size);
     printf("allow letters on password: %s\n",parsed_key->allow_letters_on_passowrd? "true":"false");
 }
+
+
+void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time){
+
+    long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
+    long next_point = last_point + parsed_key->interval;
+    *time_ramaing = (int)(next_point - actual_time);
+
+    char generated_sha[82] = {0};
+    char generated_seed[100] = {0};
+    sprintf(generated_seed,"%s%li",parsed_key->generated_sha,last_point);
+
+
+    if(parsed_key->allow_letters_on_passowrd){
+
+        private_ctop_calc_sha_256_generating_string(generated_sha,generated_seed);
+
+    }
+    else{
+        private_ctop_calc_sha_256_generating_number(generated_sha,generated_seed);
+    }
+    private_ctop_sub_str(password,generated_sha,0,parsed_key->password_size);
+}
+
+
+void ctop_get_password(char *password,int *time_ramaing,const char *key,long actual_time){
+    CTopParsedKey parsed_key = ctop_parse_key(key);
+    CTopParsedKey_get_password(&parsed_key,password,time_ramaing,actual_time);
+}
+
 
 #endif
