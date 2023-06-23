@@ -38,11 +38,11 @@ SOFTWARE.
 #include "time_calc/calc_time.h"
 
 #include "CTopKeyAttributes/CTopKeyAttributes.h"
-#include "CTopParsedKey/COTParsedKey.h"
+#include "COTParsedKey/COTParsedKey.h"
 
 #include "extras/extras.c"
 #include "time_calc/calc_time.c"
 #include "CTopKeyAttributes/CTopKeyAttributes.c"
-#include "CTopParsedKey/COTParsedKey.c"
+#include "COTParsedKey/COTParsedKey.c"
 
 #endif
