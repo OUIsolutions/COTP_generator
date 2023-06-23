@@ -4,12 +4,12 @@
 
 int main(){
 
-    const char *key = "b66458015370cd0eb641ed89a9159d9cb3f304e019dc4323065fe7bc067c353500000060201";
+    const char *key = "2fa4bb1ad83d3aacd2f5e645c0e6289b65bd5e84a7d0d623dd549f9ef7b691a300001800201";
 
     char password[COTP_MAX]  = {0};
     int time_remaning;
 
-    
+
     while(true){
         system("clear");
 
