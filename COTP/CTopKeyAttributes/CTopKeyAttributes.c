@@ -70,8 +70,8 @@ void ctop_create_key(
     private_ctop_sanitize_attributes(attributes);
     //creating the elements
 
-    char interval[11] = {0};
-    private_ctop_format_num(interval,attributes->interval,10);
+    char interval[9] = {0};
+    private_ctop_format_num(interval,attributes->interval,8);
 
     char password_size[3] = {0};
     private_ctop_format_num(password_size,attributes->password_size,2);

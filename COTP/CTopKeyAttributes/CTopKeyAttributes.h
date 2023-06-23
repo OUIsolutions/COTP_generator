@@ -3,7 +3,7 @@
 
 #define CTOP_MAX 100
 
-#define CTOP_DESCRIPTION_SIZE 13
+#define CTOP_DESCRIPTION_SIZE 11
 
 
 typedef struct CtopKeyAttributes{

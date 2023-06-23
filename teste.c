@@ -8,8 +8,7 @@
 int main(){
     printf("----------- Key Construction ----------------\n");
     const char *secreet = "akisjioajsidjioasidaisr";
-    int interval = ctops_days(77000);
-
+    int interval = ctops_days(365);
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
             secreet,

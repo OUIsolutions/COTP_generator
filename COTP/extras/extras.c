@@ -10,8 +10,7 @@ int private_ctop_sanitize_range(int value, int min, int max){
     return value;
 }
 void  private_ctop_format_num(char *result,int num,int num_size){
-
-    char element[10] = {0};
+    char element[11] = {0};
     sprintf(element,"%d",num);
     int element_size = (int)strlen(element);
     int zeros_to_add = num_size -element_size;
