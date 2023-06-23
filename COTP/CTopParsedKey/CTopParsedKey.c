@@ -38,24 +38,24 @@ void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
 
 void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time){
 
-    long last_pont = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
-    long next_point = last_pont + parsed_key->interval;
+    long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
+    long next_point = last_point + parsed_key->interval;
     *time_ramaing = (int)(next_point - actual_time);
 
     char generated_sha[82] = {0};
-
     char generated_seed[100] = {0};
-    sprintf(generated_seed,"%s%li",parsed_key->generated_sha,last_pont);
+    sprintf(generated_seed,"%s%li",parsed_key->generated_sha,last_point);
+
 
     if(parsed_key->allow_letters_on_passowrd){
+
         private_ctop_calc_sha_256_generating_string(generated_sha,generated_seed);
+
     }
     else{
         private_ctop_calc_sha_256_generating_number(generated_sha,generated_seed);
     }
-    private_ctop_int_sub_str(password,0,parsed_key->password_size);
-
-
+    private_ctop_sub_str(password,generated_sha,0,parsed_key->password_size);
 }
 
 

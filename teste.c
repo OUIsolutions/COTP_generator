@@ -9,16 +9,15 @@ int main(){
     printf("----------- Key Construction ----------------\n");
 
     const char *secreet = "akisjioajsidjioasidaisr";
-    int interval = ctop_minutes(30);
+    int interval = ctop_minutes(1);
 
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
             secreet,
-            time(NULL)
+    1
     );
-    key_attribtes.allow_letters_on_key = false;
-    key_attribtes.allow_letters_on_passowrd = false;
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
+
     printf("----------- Key Generation ----------------\n");
     char key[CTOP_MAX] = {0};
     ctop_create_key(key,&key_attribtes);
@@ -30,7 +29,10 @@ int main(){
     printf("----------- Getting password ----------------\n");
 
     char password[CTOP_MAX] = {0};
-    long remaning;
-    
+    int remaning;
+    ctop_get_password(password,&remaning,key,time(NULL));
+
+    printf("password: %s\n",password);
+    printf("remaning: %d\n",remaning);
 
 }
