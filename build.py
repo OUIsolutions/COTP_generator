@@ -1,6 +1,6 @@
 import CToolKit as ct
 
-STARTER  = f'COTP/COTP_main.h'
+STARTER = f'COTP/COTP_main.h'
 
 OUTPUT = 'COTPgenerator.h'
 result =amalgamated_code = ct.generate_amalgamated_code(STARTER,OUTPUT)
