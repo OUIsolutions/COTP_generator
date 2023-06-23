@@ -14,10 +14,12 @@
 #include "extras/extras.h"
 #include "time_calc/calc_time.h"
 
-#include "KeyAttributes/CTopKeyAttributes.h"
+#include "CTopKeyAttributes/CTopKeyAttributes.h"
+#include "CTopParsedKey/CTopParsedKey.h"
 
 #include "extras/extras.c"
 #include "time_calc/calc_time.c"
-#include "KeyAttributes/CTopKeyAttributes.c"
+#include "CTopKeyAttributes/CTopKeyAttributes.c"
+#include "CTopParsedKey/CTopParsedKey.c"
 
 #endif

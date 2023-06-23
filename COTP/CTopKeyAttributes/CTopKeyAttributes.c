@@ -20,21 +20,6 @@ CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned
 }
 
 
-CtopKeyAttributes ctop_parse_key(const char *key){
-    CtopKeyAttributes keey_attributes = {0};
-    keey_attributes.key_size =strlen(key);
-    int sha_size  = keey_attributes.key_size - CTOP_DESCRIPTION_SIZE;
-
-    private_ctop_sub_str(
-             keey_attributes.seed,
-             key,
-             0,
-             sha_size
-    );
-    return  keey_attributes;
-
-
-}
 
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 
@@ -72,7 +57,7 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);
     printf("password_size: %d\n",attributes->password_size);
-    printf("allow letters on KeyAttributes: %s\n",attributes->allow_letters_on_key? "true":"false");
+    printf("allow letters on CTopKeyAttributes: %s\n",attributes->allow_letters_on_key? "true":"false");
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 

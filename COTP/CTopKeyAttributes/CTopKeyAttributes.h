@@ -21,7 +21,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
 CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time);
 
-CtopKeyAttributes ctop_parse_key(const char *key);
+
 
 void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes);
 
