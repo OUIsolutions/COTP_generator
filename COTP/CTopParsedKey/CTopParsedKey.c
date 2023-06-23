@@ -34,6 +34,8 @@ void CTopParsedKey_reprsent(CTopParsedKey *parsed_key){
     printf("password size: %d\n",parsed_key->password_size);
     printf("allow letters on password: %s\n",parsed_key->allow_letters_on_passowrd? "true":"false");
 }
+
+
 void CTopParsedKey_get_password(CTopParsedKey *parsed_key,char *password,int *time_ramaing,long actual_time){
 
 }
