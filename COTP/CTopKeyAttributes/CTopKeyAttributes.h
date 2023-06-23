@@ -6,7 +6,7 @@
 #define CTOP_DESCRIPTION_SIZE 11
 
 
-typedef struct CtopKeyAttributes{
+typedef struct COTPKeyAttributes{
     char seed[200];
     int interval;
     int password_size;
@@ -14,23 +14,22 @@ typedef struct CtopKeyAttributes{
     bool allow_letters_on_passowrd;
 
     bool allow_letters_on_key;
-}CtopKeyAttributes;
+}COTPKeyAttributes;
 
-void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval);
-
-
-CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time);
+void private_ctop_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval);
 
 
-
-void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes);
-
-void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes);
+COTPKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time);
 
 
-void ctop_create_key(
+void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes);
+
+
+void CtopKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes);
+
+void cotp_create_key(
         char *key,
-        CtopKeyAttributes *attributes
+        COTPKeyAttributes *attributes
 );
 
 

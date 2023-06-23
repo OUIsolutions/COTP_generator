@@ -1,7 +1,7 @@
 
 
 
-void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int interval){
+void private_ctop_initialize_key_attribtes(COTPKeyAttributes *attributes, int interval){
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
@@ -12,8 +12,8 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 }
 
 
-CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
-    CtopKeyAttributes keey_attributes = {0};
+COTPKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned  long current_time){
+    COTPKeyAttributes keey_attributes = {0};
     private_ctop_initialize_key_attribtes(&keey_attributes,interval);
     sprintf(keey_attributes.seed,"%s%ld",secret,current_time);
     return keey_attributes;
@@ -21,7 +21,7 @@ CtopKeyAttributes newCtopKeyAttribute(int interval, const char *secret, unsigned
 
 
 
-void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
+void private_cotp_sanitize_attributes(COTPKeyAttributes *attributes){
 
     int min_key_size = 20 +CTOP_DESCRIPTION_SIZE;
     int max_key_size = 64 +CTOP_DESCRIPTION_SIZE;
@@ -51,8 +51,8 @@ void private_ctop_sanitize_attributes(CtopKeyAttributes *attributes){
 }
 
 
-void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
-    private_ctop_sanitize_attributes(attributes);
+void CtopKeyAttributes_represent_key_attributes(COTPKeyAttributes *attributes){
+    private_cotp_sanitize_attributes(attributes);
     printf("seed: %s\n",attributes->seed);
     printf("interval: %d\n",attributes->interval);
     printf("keey size: %d\n",attributes->key_size);
@@ -61,13 +61,13 @@ void CtopKeyAttributes_represent_key_attributes(CtopKeyAttributes *attributes){
     printf("allow letters on password: %s\n",attributes->allow_letters_on_passowrd? "true":"false");
 }
 
-void ctop_create_key(
+void cotp_create_key(
         char *key,
-        CtopKeyAttributes *attributes
+        COTPKeyAttributes *attributes
 ){
 
 
-    private_ctop_sanitize_attributes(attributes);
+    private_cotp_sanitize_attributes(attributes);
     //creating the elements
 
     char interval[9] = {0};

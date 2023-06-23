@@ -10,6 +10,6 @@ COTParsedKey cotp_parse_key(const char *key);
 
 void COTPParsedKey_reprsent(COTParsedKey *parsed_key);
 
-void COTParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *time_ramaing, long actual_time);
+void COTPParsedKey_get_password(COTParsedKey *parsed_key, char *password, int *time_ramaing, long actual_time);
 
 void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time);
