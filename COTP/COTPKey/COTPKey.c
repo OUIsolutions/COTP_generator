@@ -34,11 +34,11 @@ void COTPParsedKey_reprsent(COTPKey *parsed_key){
 }
 
 
-void COTPParsedKey_get_password(COTPKey *parsed_key, char *password, int *time_ramaing, long actual_time){
+void COTPParsedKey_get_password(COTPKey *parsed_key, char *password, int *time_remaning, long actual_time){
 
     long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
     long next_point = last_point + parsed_key->interval;
-    *time_ramaing = (int)(next_point - actual_time);
+    *time_remaning = (int)(next_point - actual_time);
 
     char generated_sha[82] = {0};
     char generated_seed[100] = {0};
