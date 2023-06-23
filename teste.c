@@ -27,4 +27,10 @@ int main(){
 
     CTopParsedKey parsed_key = ctop_parse_key(key);
     CTopParsedKey_reprsent(&parsed_key);
+    printf("----------- Getting password ----------------\n");
+
+    char password[CTOP_MAX] = {0};
+    int time_remaning;
+
+
 }
