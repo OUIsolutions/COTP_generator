@@ -7,14 +7,17 @@
 
 int main(){
     printf("----------- Key Construction ----------------\n");
+
     const char *secreet = "akisjioajsidjioasidaisr";
-    int interval = ctops_days(765);
+    int interval = ctop_minutes(30);
+
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
             secreet,
             time(NULL)
     );
-
+    key_attribtes.allow_letters_on_key = false;
+    key_attribtes.allow_letters_on_passowrd = false;
     CtopKeyAttributes_represent_key_attributes(&key_attribtes);
     printf("----------- Key Generation ----------------\n");
     char key[CTOP_MAX] = {0};

@@ -5,7 +5,7 @@ void private_ctop_initialize_key_attribtes(CtopKeyAttributes *attributes,int int
 
     attributes->allow_letters_on_key = true;
     attributes->allow_letters_on_passowrd = true;
-    attributes->key_size = 81 + CTOP_DESCRIPTION_SIZE;
+    attributes->key_size = CTOP_MAX;
     attributes->interval = interval;
     attributes->password_size = 20;
 
