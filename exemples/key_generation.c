@@ -17,7 +17,7 @@ int main(){
             now
     );
     char key[COTP_MAX] = {0};
-    cotp_create_key(key, &key_attribtes);
+    cotp_create_key_string_from_attributes(key, &key_attribtes);
     printf("save these key:\n%s\n", key);
     return 0;
 

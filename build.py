@@ -8,7 +8,7 @@ def execute_copilation(file:str,remove_output:bool):
     try:
         output = ct.compile_project('gcc',file)
         if remove_output:
-            remove(file)
+            remove(output)
     except ct.CopilationWarning as e:
         remove(output)
         raise e
@@ -23,9 +23,9 @@ def test_static_generation():
 def test_exemples():
     ct.generate_amalgamated_code(STARTER,f'{EXEMPLES}/{OUTPUT}')
     ct.execute_test_for_file('gcc',f'{EXEMPLES}/key_generation.c')
-    print("key_generation passed")
+    print("passed: key_generation.c")
     execute_copilation(f'{EXEMPLES}/password_generation.c',True)
-
+    print('passed: password_generation.c')
 
 test_exemples()
 amalgamated_code = ct.generate_amalgamated_code(STARTER,OUTPUT)
