@@ -1,5 +1,5 @@
 
-COTPKey cotp_parse_key(const char *key){
+COTPKey cotp_parse_key_string(const char *key){
 
     COTPKey parsed_key = {0};
     int key_size = (int)strlen(key);
@@ -26,7 +26,7 @@ COTPKey cotp_parse_key(const char *key){
 
 }
 
-void COTPParsedKey_reprsent(COTPKey *parsed_key){
+void COTPParsedKey_represent(COTPKey *parsed_key){
     printf("generated sha: %s\n",parsed_key->generated_sha);
     printf("interval: %d\n",parsed_key->interval);
     printf("password size: %d\n",parsed_key->password_size);
@@ -34,11 +34,11 @@ void COTPParsedKey_reprsent(COTPKey *parsed_key){
 }
 
 
-void COTPParsedKey_get_password(COTPKey *parsed_key, char *password, int *time_remaning, long actual_time){
+void COTPKey_get_password(COTPKey *parsed_key, char *password, int *time_ramaing, long actual_time){
 
     long last_point = (long)(actual_time / parsed_key->interval) * parsed_key->interval;
     long next_point = last_point + parsed_key->interval;
-    *time_remaning = (int)(next_point - actual_time);
+    *time_ramaing = (int)(next_point - actual_time);
 
     char generated_sha[82] = {0};
     char generated_seed[100] = {0};
@@ -56,7 +56,7 @@ void COTPParsedKey_get_password(COTPKey *parsed_key, char *password, int *time_r
     private_cotp_sub_str(password, generated_sha, 0, parsed_key->password_size);
 }
 
-void COTPKey_object_create_key_string(char *key,COTPKey *parsed_key){
+void COTPKey_object_create_key_string(char *key_string, COTPKey *parsed_key){
     char interval[9] = {0};
     private_cotp_format_num(interval, parsed_key->interval, 8);
 
@@ -64,7 +64,7 @@ void COTPKey_object_create_key_string(char *key,COTPKey *parsed_key){
     private_cotp_format_num(password_size, parsed_key->password_size, 2);
 
 
-    sprintf(key,
+    sprintf(key_string,
             "%s%s%s%d",
             parsed_key->generated_sha,
             interval,
@@ -73,7 +73,7 @@ void COTPKey_object_create_key_string(char *key,COTPKey *parsed_key){
     );
 }
 
-void cotp_get_password(char *password, int *time_ramaing, const char *key, long actual_time){
-    COTPKey parsed_key = cotp_parse_key(key);
-    COTPParsedKey_get_password(&parsed_key, password, time_ramaing, actual_time);
+void cotp_get_password(char *password, int *time_ramaing, const char *key_string, long actual_time){
+    COTPKey parsed_key = cotp_parse_key_string(key_string);
+    COTPKey_get_password(&parsed_key, password, time_ramaing, actual_time);
 }
