@@ -7,3 +7,5 @@ typedef struct CTopParsedKey{
 }CTopParsedKey;
 
 CTopParsedKey ctop_parse_key(const char *key);
+
+void CTopParsedKey_reprsent(CTopParsedKey *parsed_key);

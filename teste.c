@@ -7,8 +7,8 @@
 
 int main(){
     printf("----------- Key Construction ----------------\n");
-    const char *secreet = "akisjioajsidjioasidais";
-    int interval = ctops_days(500);
+    const char *secreet = "akisjioajsidjioasidaisr";
+    int interval = ctops_days(77000);
 
     CtopKeyAttributes  key_attribtes = newCtopKeyAttribute(
             interval,
@@ -23,4 +23,6 @@ int main(){
     printf("key: %s\n", key);
     printf("----------- Key parsing ----------------\n");
 
+    CTopParsedKey parsed_key = ctop_parse_key(key);
+    CTopParsedKey_reprsent(&parsed_key);
 }

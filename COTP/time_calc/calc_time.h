@@ -1,5 +1,5 @@
 
 
-int ctop_minutes(int minutes);
-int ctop_hours(int hours);
-int ctops_days(int days);
+long ctop_minutes(int minutes);
+long ctop_hours(int hours);
+long ctops_days(int days);
