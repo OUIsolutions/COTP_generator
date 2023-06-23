@@ -51,7 +51,14 @@ def test_static_password():
         time remaning: 59
         """
     )
-
+def test_static_custom_password():
+    test_execution(
+        f'{EXEMPLES}/static_custom_password.c',
+        """
+        key: 1733211172
+        time remaning: 1799
+        """
+    )
 
 def test_static_custom_key():
     test_execution(
@@ -69,6 +76,7 @@ def test_exemples():
     test_static_key_generation()
     test_static_password()
     test_static_custom_key()
+    test_static_custom_password()
 
 
 
