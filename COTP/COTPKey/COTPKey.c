@@ -40,7 +40,7 @@ void COTPKey_get_password(COTPKey *parsed_key, char *password, int *time_ramaing
     long next_point = last_point + parsed_key->interval;
     *time_ramaing = (int)(next_point - actual_time);
 
-    char generated_sha[82] = {0};
+    char generated_sha[83] = {0};
     char generated_seed[100] = {0};
     sprintf(generated_seed,"%s%li",parsed_key->generated_sha,last_point);
 
@@ -53,6 +53,7 @@ void COTPKey_get_password(COTPKey *parsed_key, char *password, int *time_ramaing
     else{
         private_cotp_calc_sha_256_generating_number(generated_sha, generated_seed);
     }
+    //printf("sha generated: %s\n",generated_sha);
     private_cotp_sub_str(password, generated_sha, 0, parsed_key->password_size);
 }
 

@@ -42,9 +42,9 @@ void  private_cotp_calc_sha_256_generating_number(char *hash_string, const char 
 
         char result[5] = {0};
         sprintf(result,"%d",hash[i]);
-        sprintf((hash_string + hash_string_size), "%s", result);
-        hash_string_size+= (int)strlen(result);
-
+        int size = strlen(result);
+        memcpy((hash_string + hash_string_size),result,size);
+        hash_string_size += size;
     }
 }
 
