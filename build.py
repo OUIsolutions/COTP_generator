@@ -1,4 +1,5 @@
 import Build.CToolKit as ct
+from Build.full_folder_zip import zip_folder
 from os import remove
 
 EXEMPLES = 'exemples'
@@ -85,3 +86,6 @@ def test_exemples():
 test_exemples()
 amalgamated_code = ct.generate_amalgamated_code(STARTER,OUTPUT)
 ct.include_code_in_markdown('README.md',True)
+
+
+zip_folder('COTP_Generator')
