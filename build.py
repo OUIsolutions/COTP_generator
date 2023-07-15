@@ -1,5 +1,6 @@
-import CToolKit as ct
+import Build.CToolKit as ct
 from os import remove
+
 EXEMPLES = 'exemples'
 OUTPUT = 'COTPgenerator.h'
 STARTER = f'COTP/COTP_main.h'
