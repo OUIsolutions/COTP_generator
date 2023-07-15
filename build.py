@@ -8,7 +8,7 @@ STARTER = f'COTP/COTP_main.h'
 
 def execute_copilation(file:str,remove_output:bool):
     try:
-        output = ct.compile_project('gcc',file)
+        output = ct.compile_project(file)
         if remove_output:
             remove(output)
         return output
@@ -69,7 +69,7 @@ def test_static_custom_key():
 
 def test_exemples():
     ct.generate_amalgamated_code(STARTER,f'{EXEMPLES}/{OUTPUT}')
-    ct.execute_test_for_file('gcc',f'{EXEMPLES}/random_key_generation.c')
+    ct.execute_test_for_file(f'{EXEMPLES}/random_key_generation.c')
     print("passed: random_key_generation.c")
     execute_copilation(f'{EXEMPLES}/password_generation.c',True)
     execute_copilation(f'{EXEMPLES}/custom_key.c',True)
